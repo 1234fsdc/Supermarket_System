@@ -1,0 +1,29 @@
+server:
+    port: 8080
+sky:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: sky_take_out
+    username: root
+    password: root
+  alioss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    access-key-id: LTAI5tLiFQyh11SaK6SCuNs5
+    access-key-secret: ihuWfva6fouEyO7RIr66ELIhyr9qaE
+    bucket-name: sky-sfd
+  redis:
+    host: localhost
+    port: 6379
+
+  shop:
+    address: 北京市昌平区回龙观龙博家园
+
+  baidu:
+    ak: 9G8Z0v5jKlT8xNq2bRmH7pLc
+
+  wechat:
+    appid: wx84f7a00b63bd3cfd
+    secret: 3190980c4c4bf702a975993331d2c95e
+   
