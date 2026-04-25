@@ -20059,7 +20059,7 @@ exports.userLogin = userLogin;var getCategoryList = function getCategoryList(par
 // 查询菜品管理列表
 exports.getCategoryList = getCategoryList;var dishListByCategoryId = function dishListByCategoryId(params) {
   return (0, _request.request)({
-    url: '/user/dish/list',
+    url: '/user/product/list',
     method: 'GET',
     params: params });
 

@@ -32,23 +32,23 @@
     <select id="pageQuery" resultType="com.sky.entity.Orders">
         select * from orders
         <where>
-            <if test="number != null and number!=''">
-                and number like concat('%',#{number},'%')
+            <if test="ordersPageQueryDTO.number != null and ordersPageQueryDTO.number!=''">
+                and number like concat('%',#{ordersPageQueryDTO.number},'%')
             </if>
-            <if test="phone != null and phone!=''">
-                and phone like concat('%',#{phone},'%')
+            <if test="ordersPageQueryDTO.phone != null and ordersPageQueryDTO.phone!=''">
+                and phone like concat('%',#{ordersPageQueryDTO.phone},'%')
             </if>
-            <if test="userId != null">
-                and user_id = #{userId}
+            <if test="ordersPageQueryDTO.userId != null">
+                and user_id = #{ordersPageQueryDTO.userId}
             </if>
-            <if test="status != null">
-                and status = #{status}
+            <if test="ordersPageQueryDTO.status != null">
+                and status = #{ordersPageQueryDTO.status}
             </if>
-            <if test="beginTime != null">
-                and order_time &gt;= #{beginTime}
+            <if test="ordersPageQueryDTO.beginTime != null">
+                and order_time &gt;= #{ordersPageQueryDTO.beginTime}
             </if>
-            <if test="endTime != null">
-                and order_time &lt;= #{endTime}
+            <if test="ordersPageQueryDTO.endTime != null">
+                and order_time &lt;= #{ordersPageQueryDTO.endTime}
             </if>
         </where>
         order by order_time desc

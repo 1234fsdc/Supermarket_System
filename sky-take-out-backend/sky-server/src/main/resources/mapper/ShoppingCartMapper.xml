@@ -8,11 +8,8 @@
             <if test="userId != null">
                 user_id = #{userId}
             </if>
-            <if test="dishId != null">
-                AND dish_id = #{dishId}
-            </if>
-            <if test="setmealId != null">
-                AND setmeal_id = #{setmealId}
+            <if test="productId != null">
+                AND product_id = #{productId}
             </if>
             <if test="dishFlavor != null and dishFlavor != ''">
                 AND dish_flavor = #{dishFlavor}

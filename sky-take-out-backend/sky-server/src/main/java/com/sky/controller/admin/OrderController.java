@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
  * 订单管理
  */
 @RestController("adminOrderController")
-@RequestMapping("/admin/order")
+@RequestMapping({"/order", "/api/order"})
 @Slf4j
 @Api(tags = "订单管理接口")
 public class OrderController {
