@@ -31,6 +31,18 @@
           </view>
           <view class="msg-bubble {{item.type === 'user' ? 'user-bubble' : 'bot-bubble'}}">
             <text class="msg-text">{{item.content}}</text>
+            <view class="recommend-list" wx:if="{{item.products && item.products.length > 0}}">
+              <view class="recommend-title">为您推荐：</view>
+              <block wx:for="{{item.products}}" wx:for-item="p" wx:for-index="pi" wx:key="pi">
+                <view class="recommend-item">
+                  <view class="rec-name">{{p.name}}</view>
+                  <view class="rec-desc">{{p.desc}}</view>
+                  <view class="rec-price">
+                    <text class="rec-price-icon">¥</text>{{p.price}}
+                  </view>
+                </view>
+              </block>
+            </view>
           </view>
         </view>
       </block>

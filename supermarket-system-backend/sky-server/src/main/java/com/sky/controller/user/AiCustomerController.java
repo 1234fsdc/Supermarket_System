@@ -1,5 +1,6 @@
 package com.sky.controller.user;
 
+import com.sky.dto.CustomerServiceResult;
 import com.sky.result.Result;
 import com.sky.service.AiCustomerServiceService;
 import io.swagger.annotations.Api;
@@ -27,13 +28,13 @@ public class AiCustomerController {
      * AI客服问答接口
      *
      * @param question 用户问题
-     * @return AI回答
+     * @return AI回答（含推荐商品）
      */
     @GetMapping("/ask")
     @ApiOperation("AI客服问答")
-    public Result<String> ask(@RequestParam String question) {
+    public Result<CustomerServiceResult> ask(@RequestParam String question) {
         log.info("收到AI客服咨询，问题：{}", question);
-        String answer = aiCustomerServiceService.getAnswer(question);
-        return Result.success(answer);
+        CustomerServiceResult result = aiCustomerServiceService.getAnswer(question);
+        return Result.success(result);
     }
 }

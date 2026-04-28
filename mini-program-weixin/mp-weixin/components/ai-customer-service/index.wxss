@@ -236,3 +236,55 @@
 .send-btn.active {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
+
+.recommend-list {
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.recommend-title {
+  font-size: 24rpx;
+  color: #667eea;
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.recommend-item {
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+  margin-bottom: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recommend-item:last-child {
+  margin-bottom: 0;
+}
+
+.rec-name {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  flex: 1;
+}
+
+.rec-desc {
+  font-size: 22rpx;
+  color: #999;
+  margin-left: 16rpx;
+  flex: 1;
+}
+
+.rec-price {
+  font-size: 28rpx;
+  color: #ff4d4f;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rec-price-icon {
+  font-size: 22rpx;
+}
