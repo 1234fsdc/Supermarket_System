@@ -19948,7 +19948,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.repetitionOrder = exports.paymentOrder = exports.reminderOrder = exports.cancelOrder = exports.getOrderDetail = exports.getOrderPage = exports.getShopPhone = exports.getShopStatus = exports.querySetmealDishById = exports.getAddressBookDefault = exports.oneOrderAgain = exports.queryAddressBookById = exports.delAddressBook = exports.editAddressBook = exports.addAddressBook = exports.putAddressBookDefault = exports.queryAddressBookList = exports.submitOrderSubmit = exports.queryOrderUserPage = exports.delShoppingCart = exports.newShoppingCartSub = exports.newAddShoppingCartAdd = exports.editHoppingCart = exports.getShoppingCartList = exports.querySetmeaList = exports.addShoppingCart = exports.commonDownload = exports.dishListByCategoryId = exports.getCategoryList = exports.userLogin = exports.payOrder = exports.clearOrder = exports.delDish = exports.addDish = exports.getDishList = exports.getDishDetail = exports.getList = exports.getMoreNorm = exports.getTableOrderDishList = exports.getTableState = exports.openTable = void 0;var _request = __webpack_require__(/*! ../../utils/request.js */ 25);
+Object.defineProperty(exports, "__esModule", { value: true });exports.repetitionOrder = exports.paymentOrder = exports.cancelOrder = exports.getOrderDetail = exports.getOrderPage = exports.getShopPhone = exports.getShopStatus = exports.querySetmealDishById = exports.getAddressBookDefault = exports.oneOrderAgain = exports.queryAddressBookById = exports.delAddressBook = exports.editAddressBook = exports.addAddressBook = exports.putAddressBookDefault = exports.queryAddressBookList = exports.submitOrderSubmit = exports.queryOrderUserPage = exports.delShoppingCart = exports.newShoppingCartSub = exports.newAddShoppingCartAdd = exports.editHoppingCart = exports.getShoppingCartList = exports.querySetmeaList = exports.addShoppingCart = exports.commonDownload = exports.dishListByCategoryId = exports.getCategoryList = exports.userLogin = exports.payOrder = exports.clearOrder = exports.delDish = exports.addDish = exports.getDishList = exports.getDishDetail = exports.getList = exports.getMoreNorm = exports.getTableOrderDishList = exports.getTableState = exports.openTable = void 0;var _request = __webpack_require__(/*! ../../utils/request.js */ 25);
 
 // 开桌
 var openTable = function openTable(params) {return (
@@ -20279,14 +20279,8 @@ exports.getOrderDetail = getOrderDetail;var cancelOrder = function cancelOrder(p
       url: "/user/order/cancel/".concat(params),
       method: 'PUT' }));};
 
-// 催单
-exports.cancelOrder = cancelOrder;var reminderOrder = function reminderOrder(params) {return (
-    (0, _request.request)({
-      url: "/user/order/reminder/".concat(params),
-      method: 'GET' }));};
-
 // 订单支付
-exports.reminderOrder = reminderOrder;var paymentOrder = function paymentOrder(params) {return (
+exports.cancelOrder = cancelOrder;var paymentOrder = function paymentOrder(params) {return (
     (0, _request.request)({
       url: "/user/order/payment",
       method: 'PUT',
@@ -28537,17 +28531,6 @@ var _default = {
       });
     },
 
-    // 催单
-    handleReminder: function handleReminder(type, id) {var _this2 = this;
-      (0, _api.reminderOrder)(id).then(function (res) {
-        if (res.code === 1) {
-          _this2.showConfirm = true;
-          _this2.textTip = '您的催单信息已发出！';
-          _this2.$refs.commonPopup.open(type);
-          _this2.orderId = id;
-        }
-      });
-    },
     // 取消订单接口
     cancel: function cancel(type, obj) {var _this3 = this;
       (0, _api.cancelOrder)(obj.id).then(function (res) {

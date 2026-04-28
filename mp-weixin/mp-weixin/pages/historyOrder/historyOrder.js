@@ -433,17 +433,6 @@ var _index = __webpack_require__(/*! @/utils/index.js */ 29);function _interopRe
 
 
     },
-    // 催单
-    handleReminder: function handleReminder(type, id) {var _this3 = this;
-      (0, _api.reminderOrder)(id).then(function (res) {
-        if (res.code === 1) {
-          _this3.showConfirm = true;
-          _this3.textTip = '您的催单信息已发出！';
-          _this3.$refs.commonPopup.open(type);
-          _this3.getList(_this3.status);
-        }
-      });
-    },
     // 关闭弹层
     closePopup: function closePopup(type) {
       this.$refs.commonPopup.close(type);
