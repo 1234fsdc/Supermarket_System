@@ -3,7 +3,7 @@
     <div class="sidebar">
       <div class="logo">
         <el-icon :size="28" color="#f59e0b"><Food /></el-icon>
-        <span class="logo-text">瑞吉外卖</span>
+        <span class="logo-text">凡栋超市</span>
       </div>
       <div class="menu-container">
         <div 
@@ -28,19 +28,7 @@
           </el-breadcrumb>
         </div>
         <div class="header-right">
-          <el-dropdown trigger="click" @command="handleUserCommand">
-            <span class="user-info">
-              <el-avatar :size="32" src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
-              <span class="user-name">{{ userInfo.name }}</span>
-              <el-icon><ArrowDown /></el-icon>
-            </span>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item command="profile">个人中心</el-dropdown-item>
-                <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
+          <el-button type="danger" size="small" @click="handleLogout">退出登录</el-button>
         </div>
       </div>
 
@@ -52,7 +40,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
   DataBoard,
@@ -106,8 +94,6 @@ const menuItems = ref([
   }
 ])
 
-const userInfo = ref({ name: '管理员' })
-
 const currentPath = ref(route.path)
 
 watch(
@@ -130,20 +116,13 @@ const handleMenuClick = (item) => {
   router.push(item.path)
 }
 
-const handleUserCommand = (command) => {
-  if (command === 'logout') {
-    localStorage.removeItem('token')
-    localStorage.removeItem('userInfo')
-    router.push('/login')
-  }
+const handleLogout = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('userInfo')
+  router.push('/login')
 }
 
-onMounted(() => {
-  const stored = localStorage.getItem('userInfo')
-  if (stored) {
-    userInfo.value = JSON.parse(stored)
-  }
-})
+
 </script>
 
 <style scoped lang="scss">

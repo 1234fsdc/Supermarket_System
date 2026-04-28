@@ -20,6 +20,49 @@
         </el-form-item>
       </el-form>
 
+      <el-row :gutter="20" style="margin-bottom: 20px;">
+        <el-col :span="4">
+          <el-card shadow="hover">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: #409EFF;">{{ statistics.toBeConfirmed || 0 }}</div>
+              <div style="color: #666; margin-top: 5px;">待接单</div>
+            </div>
+          </el-card>
+        </el-col>
+        <el-col :span="4">
+          <el-card shadow="hover">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: #67C23A;">{{ statistics.confirmed || 0 }}</div>
+              <div style="color: #666; margin-top: 5px;">已接单</div>
+            </div>
+          </el-card>
+        </el-col>
+        <el-col :span="4">
+          <el-card shadow="hover">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: #E6A23C;">{{ statistics.deliveryInProgress || 0 }}</div>
+              <div style="color: #666; margin-top: 5px;">派送中</div>
+            </div>
+          </el-card>
+        </el-col>
+        <el-col :span="4">
+          <el-card shadow="hover">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: #909399;">{{ statistics.completed || 0 }}</div>
+              <div style="color: #666; margin-top: 5px;">已完成</div>
+            </div>
+          </el-card>
+        </el-col>
+        <el-col :span="4">
+          <el-card shadow="hover">
+            <div style="text-align: center;">
+              <div style="font-size: 24px; font-weight: bold; color: #F56C6C;">{{ statistics.cancelled || 0 }}</div>
+              <div style="color: #666; margin-top: 5px;">已取消</div>
+            </div>
+          </el-card>
+        </el-col>
+      </el-row>
+
       <el-table :data="orderList" style="width: 100%">
         <el-table-column prop="number" label="订单号" width="180" />
         <el-table-column prop="userName" label="用户名" width="120" />
@@ -36,12 +79,14 @@
           </template>
         </el-table-column>
         <el-table-column prop="orderTime" label="下单时间" width="180" />
-        <el-table-column label="操作" width="250" fixed="right">
+        <el-table-column label="操作" width="300" fixed="right">
           <template #default="{ row }">
             <el-button type="primary" size="small" @click="handleDetail(row)">详情</el-button>
             <el-button v-if="row.status === 2" type="success" size="small" @click="handleAccept(row)">接单</el-button>
+            <el-button v-if="row.status === 2" type="danger" size="small" @click="handleReject(row)">拒单</el-button>
             <el-button v-if="row.status === 3" type="warning" size="small" @click="handleDelivery(row)">派送</el-button>
             <el-button v-if="row.status === 4" type="info" size="small" @click="handleComplete(row)">完成</el-button>
+            <el-button v-if="row.status === 2 || row.status === 3" type="danger" size="small" @click="handleCancel(row)">取消</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -89,8 +134,8 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { ElMessage } from 'element-plus'
-import { orderConditionSearch, getOrderDetails, confirmOrder, completeOrder, deliveryOrder } from '@/api/order'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { orderConditionSearch, getOrderDetails, confirmOrder, completeOrder, deliveryOrder, rejectionOrder, cancelOrder, getOrderStatistics } from '@/api/order'
 
 const queryForm = ref({
   number: '',
@@ -101,6 +146,7 @@ const queryForm = ref({
 
 const total = ref(0)
 const orderList = ref([])
+const statistics = ref({})
 
 const detailVisible = ref(false)
 const currentOrder = ref(null)
@@ -125,6 +171,61 @@ const fetchData = async () => {
   }
 }
 
+const fetchStatistics = async () => {
+  try {
+    const res = await getOrderStatistics()
+    statistics.value = res.data || {}
+  } catch (error) {
+    console.error('获取订单统计失败:', error)
+  }
+}
+
+const handleReject = async (row) => {
+  try {
+    const { value } = await ElMessageBox.prompt('请输入拒单原因', '拒单', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      inputValidator: (value) => {
+        if (!value || value.trim() === '') {
+          return '请输入拒单原因'
+        }
+        return true
+      }
+    })
+    await rejectionOrder({ id: row.id, rejectionReason: value })
+    ElMessage.success('拒单成功')
+    fetchData()
+    fetchStatistics()
+  } catch (error) {
+    if (error !== 'cancel') {
+      console.error('拒单失败:', error)
+    }
+  }
+}
+
+const handleCancel = async (row) => {
+  try {
+    const { value } = await ElMessageBox.prompt('请输入取消原因', '取消订单', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      inputValidator: (value) => {
+        if (!value || value.trim() === '') {
+          return '请输入取消原因'
+        }
+        return true
+      }
+    })
+    await cancelOrder({ id: row.id, cancelReason: value })
+    ElMessage.success('取消订单成功')
+    fetchData()
+    fetchStatistics()
+  } catch (error) {
+    if (error !== 'cancel') {
+      console.error('取消订单失败:', error)
+    }
+  }
+}
+
 const handleReset = () => {
   queryForm.value = { number: '', status: '', page: 1, pageSize: 10 }
   fetchData()
@@ -142,9 +243,10 @@ const handleDetail = async (row) => {
 
 const handleAccept = async (row) => {
   try {
-    await confirmOrder({ orderId: row.id })
+    await confirmOrder({ id: row.id })
     ElMessage.success('接单成功')
     fetchData()
+    fetchStatistics()
   } catch (error) {
     console.error('接单失败:', error)
   }
@@ -155,6 +257,7 @@ const handleDelivery = async (row) => {
     await deliveryOrder(row.id)
     ElMessage.success('已派送')
     fetchData()
+    fetchStatistics()
   } catch (error) {
     console.error('派送失败:', error)
   }
@@ -165,6 +268,7 @@ const handleComplete = async (row) => {
     await completeOrder(row.id)
     ElMessage.success('订单已完成')
     fetchData()
+    fetchStatistics()
   } catch (error) {
     console.error('完成订单失败:', error)
   }
@@ -172,6 +276,7 @@ const handleComplete = async (row) => {
 
 onMounted(() => {
   fetchData()
+  fetchStatistics()
 })
 </script>
 

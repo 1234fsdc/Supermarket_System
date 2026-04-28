@@ -2,7 +2,7 @@
   <div class="login-container">
     <div class="login-form">
       <div class="login-header">
-        <h2>瑞吉外卖后台管理</h2>
+        <h2>凡栋超市后台管理</h2>
         <p>欢迎登录</p>
       </div>
       <el-form :model="loginForm" :rules="rules" ref="formRef">
@@ -36,6 +36,14 @@
           </el-button>
         </el-form-item>
       </el-form>
+      <div class="test-account">
+        <el-alert
+          title="测试账号: admin  密码: 123456"
+          type="info"
+          :closable="false"
+          center
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -102,5 +110,9 @@ const handleLogin = async () => {
     color: #999;
     font-size: 14px;
   }
+}
+
+.test-account {
+  margin-top: 15px;
 }
 </style>
