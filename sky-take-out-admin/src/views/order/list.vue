@@ -73,9 +73,9 @@
         </el-descriptions>
 
         <div v-if="currentOrder.orderDetailList && currentOrder.orderDetailList.length > 0" style="margin-top: 20px;">
-          <h4>订单菜品</h4>
+          <h4>订单商品</h4>
           <el-table :data="currentOrder.orderDetailList" border style="margin-top: 10px;">
-            <el-table-column prop="name" label="菜品名称" />
+            <el-table-column prop="name" label="商品名称" />
             <el-table-column prop="number" label="数量" width="100" />
             <el-table-column prop="amount" label="金额" width="100">
               <template #default="{ row }">¥{{ row.amount }}</template>

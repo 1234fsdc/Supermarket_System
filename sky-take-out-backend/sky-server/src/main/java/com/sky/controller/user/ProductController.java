@@ -11,7 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -67,5 +69,35 @@ public class ProductController {
         log.info("商品列表已存入 Redis 缓存");
 
         return Result.success(list);
+    }
+
+    /**
+     * 根据ID查询商品详情
+     *
+     * @param id 商品ID
+     * @return 商品详情
+     */
+    @GetMapping("/detail")
+    @ApiOperation("根据ID查询商品详情")
+    public Result<ProductVO> detail(@RequestParam Long id) {
+        log.info("根据ID查询商品详情，商品ID：{}", id);
+        Product product = productService.getById(id);
+        if (product == null || product.getStatus() != StatusConstant.ENABLE) {
+            return Result.success(null);
+        }
+        ProductVO productVO = new ProductVO();
+        productVO.setId(product.getId());
+        productVO.setName(product.getName());
+        productVO.setCategoryId(product.getCategoryId());
+        productVO.setPrice(product.getPrice());
+        productVO.setImage(product.getImage());
+        productVO.setDescription(product.getDescription());
+        productVO.setStatus(product.getStatus());
+        productVO.setUnit(product.getUnit());
+        productVO.setSalesVolume(product.getSalesVolume());
+        productVO.setRating(product.getRating());
+        productVO.setRebuyCount(product.getRebuyCount());
+        productVO.setPromoTag(product.getPromoTag());
+        return Result.success(productVO);
     }
 }

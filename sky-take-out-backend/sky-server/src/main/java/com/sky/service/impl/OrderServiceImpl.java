@@ -230,36 +230,36 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /**
-     * 获取订单菜品信息
+     * 获取订单商品信息
      */
     private List<OrderVO> getOrderVOList(IPage<Orders> ordersPage) {
         List<OrderVO> orderVOList = new ArrayList<>();
         for (Orders orders : ordersPage.getRecords()) {
             OrderVO orderVO = new OrderVO();
             BeanUtils.copyProperties(orders, orderVO);
-            String orderDishes = getOrderDishesStr(orders);
-            orderVO.setOrderDishes(orderDishes);
+            String orderProducts = getOrderProductsStr(orders);
+            orderVO.setOrderDishes(orderProducts);
             orderVOList.add(orderVO);
         }
         return orderVOList;
     }
 
     /**
-     * 获取订单菜品信息
+     * 获取订单商品信息
      */
-    private String getOrderDishesStr(Orders orders) {
+    private String getOrderProductsStr(Orders orders) {
         List<OrderDetail> orderDetailList = orderDetailMapper.selectList(orders.getId());
 
         if (orderDetailList == null || orderDetailList.isEmpty()) {
             return "";
         }
 
-        List<String> orderDishList = orderDetailList.stream().map(x -> {
-            String orderDish = x.getName() + "*" + x.getNumber() + ";";
-            return orderDish;
+        List<String> orderProductList = orderDetailList.stream().map(x -> {
+            String orderProduct = x.getName() + "*" + x.getNumber() + ";";
+            return orderProduct;
         }).collect(Collectors.toList());
 
-        return String.join("", orderDishList);
+        return String.join("", orderProductList);
     }
 
     /**

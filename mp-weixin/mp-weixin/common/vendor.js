@@ -4436,7 +4436,7 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 29);function _inter
                 param = {
                   categoryId: params.id };
 
-                // type：1是菜品、2是套餐
+                // type：1是商品
                 if (!(params.type === 1)) {_context4.next = 8;break;}_context4.next = 6;return (
                   (0, _api.dishListByCategoryId)(param).then(function (res) {
                     if (res && res.code === 1) {
@@ -19973,34 +19973,34 @@ exports.getTableState = getTableState;var getTableOrderDishList = function getTa
       method: 'GET',
       params: params }));};
 
-// 获取菜品规格
+// 获取商品规格
 exports.getTableOrderDishList = getTableOrderDishList;var getMoreNorm = function getMoreNorm(params) {return (
     (0, _request.request)({
-      url: "/user/dish/flavor/".concat(params.dishId),
+      url: '/user/product/flavor',
       method: 'GET',
       params: params }));};
 
 
-// 获取菜品分类列表	
+// 获取商品分类列表	
 exports.getMoreNorm = getMoreNorm;var getList = function getList(params) {return (
     (0, _request.request)({
-      url: "/user/dish/category",
+      url: '/user/category/list',
       method: 'GET',
       params: params }));};
 
 
-// 获取菜品详情	
+// 获取商品详情	
 exports.getList = getList;var getDishDetail = function getDishDetail(params) {return (
     (0, _request.request)({
-      url: "/user/dish/setmealDishList/".concat(params.setmealId),
+      url: '/user/product/detail',
       method: 'GET',
       params: params }));};
 
 
-// 根据分类获取菜品列表
+// 根据分类获取商品列表
 exports.getDishDetail = getDishDetail;var getDishList = function getDishList(params) {return (
     (0, _request.request)({
-      url: "/user/dish/dishPageList/".concat(params.categoryId, "/").concat(params.type, "/").concat(params.page, "/").concat(params.pageSize),
+      url: '/user/product/list',
       method: 'GET',
       params: params }));};
 
@@ -20047,7 +20047,7 @@ exports.payOrder = payOrder;var userLogin = function userLogin(params) {
 
 };
 
-// 菜品和套餐的分类
+// 商品分类
 exports.userLogin = userLogin;var getCategoryList = function getCategoryList(params) {
   return (0, _request.request)({
     url: '/user/category/list',
@@ -20056,7 +20056,7 @@ exports.userLogin = userLogin;var getCategoryList = function getCategoryList(par
 
 };
 
-// 查询菜品管理列表
+// 查询商品列表
 exports.getCategoryList = getCategoryList;var dishListByCategoryId = function dishListByCategoryId(params) {
   return (0, _request.request)({
     url: '/user/product/list',
@@ -20084,7 +20084,7 @@ exports.commonDownload = commonDownload;var addShoppingCart = function addShoppi
 
 };
 
-// 根据type类型查询是套餐的接口
+// 根据type类型查询商品分类的接口
 exports.addShoppingCart = addShoppingCart;var querySetmeaList = function querySetmeaList(params) {
   return (0, _request.request)({
     url: '/user/setmeal/list',
