@@ -81,23 +81,10 @@ public class ProductController {
     @ApiOperation("根据ID查询商品详情")
     public Result<ProductVO> detail(@RequestParam Long id) {
         log.info("根据ID查询商品详情，商品ID：{}", id);
-        Product product = productService.getById(id);
-        if (product == null || product.getStatus() != StatusConstant.ENABLE) {
+        ProductVO productVO = productService.getById(id);
+        if (productVO == null || productVO.getStatus() != StatusConstant.ENABLE) {
             return Result.success(null);
         }
-        ProductVO productVO = new ProductVO();
-        productVO.setId(product.getId());
-        productVO.setName(product.getName());
-        productVO.setCategoryId(product.getCategoryId());
-        productVO.setPrice(product.getPrice());
-        productVO.setImage(product.getImage());
-        productVO.setDescription(product.getDescription());
-        productVO.setStatus(product.getStatus());
-        productVO.setUnit(product.getUnit());
-        productVO.setSalesVolume(product.getSalesVolume());
-        productVO.setRating(product.getRating());
-        productVO.setRebuyCount(product.getRebuyCount());
-        productVO.setPromoTag(product.getPromoTag());
         return Result.success(productVO);
     }
 }

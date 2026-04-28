@@ -134,9 +134,9 @@ public class AddressBookController {
             没查到 或 查到多条 → 返回 “没有查询到默认地址”
          */
         AddressBook addressBook = new AddressBook();
-        List<AddressBook> addressBookList = addressBookService.selectList(addressBook);
         addressBook.setIsDefault(1);
         addressBook.setUserId(BaseContext.getCurrentId());
+        List<AddressBook> addressBookList = addressBookService.selectList(addressBook);
         if(addressBookList != null && addressBookList.size() == 1){
             addressBook = addressBookList.get(0);
             return Result.success(addressBook);

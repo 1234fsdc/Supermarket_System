@@ -28,6 +28,7 @@ import com.sky.service.OrderService;
 import com.sky.service.ShoppingCartService;
 import com.sky.utils.HttpClientUtil;
 import com.sky.mapper.AddressBookMapper;
+import java.math.BigDecimal;
 import com.sky.mapper.OrderDetailMapper;
 import com.sky.mapper.OrderMapper;
 import com.sky.mapper.ShoppingCartMapper;
@@ -97,6 +98,9 @@ public class OrderServiceImpl implements OrderService {
         orders.setNumber(String.valueOf(System.currentTimeMillis()));
         orders.setPhone(addressBook.getPhone());
         orders.setConsignee(addressBook.getConsignee());
+        // 组合完整地址：省+市+区+详细地址
+        String fullAddress = addressBook.getProvinceName() + addressBook.getCityName() + addressBook.getDistrictName() + addressBook.getDetail();
+        orders.setAddress(fullAddress);
         orders.setUserId(userId);
         orders.setAddressBookId(ordersSubmitDTO.getAddressBookId());
 
@@ -125,7 +129,7 @@ public class OrderServiceImpl implements OrderService {
                 .id(orders.getId())
                 .orderTime(orders.getOrderTime())
                 .orderNumber(orders.getNumber())
-                .orderAmount(orders.getAmount())
+                .orderAmount(orders.getAmount().setScale(2, BigDecimal.ROUND_HALF_UP))
                 .build();
         return orderSubmitVO;
     }
@@ -194,7 +198,8 @@ public class OrderServiceImpl implements OrderService {
     public void cancelOrder(Long id) {
         Orders orders = orderMapper.selectById(id);
         Integer ordersStatus = orders.getStatus();
-        if (ordersStatus != Orders.PENDING_PAYMENT) {
+        // 只要没有接单（待付款或待接单）都可以取消
+        if (ordersStatus != Orders.PENDING_PAYMENT && ordersStatus != Orders.TO_BE_CONFIRMED) {
             throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
         } else {
             orders.setStatus(Orders.CANCELLED);
