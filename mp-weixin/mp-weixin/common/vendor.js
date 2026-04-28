@@ -4549,17 +4549,17 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 29);function _inter
                 if (item.type === 1) {
                   params = _objectSpread(_objectSpread({},
                   params), {}, {
-                    dishId: item.id });
+                    productId: item.id });
 
                 } else if (item.type === 2) {
                   params = {
                     setmealId: item.id };
 
                 } else if (form === '购物车') {
-                  if (item.dishId) {
+                  if (item.dishId || item.productId) {
                     params = _objectSpread(_objectSpread({},
                     params), {}, {
-                      dishId: item.dishId });
+                      productId: item.productId || item.dishId });
 
                   } else {
                     params = {
@@ -4617,7 +4617,7 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 29);function _inter
                 if (item.type === 1) {
                   params = _objectSpread(_objectSpread({},
                   params), {}, {
-                    dishId: item.id });
+                    productId: item.id });
 
                 } else if (item.type === 2) {
                   params = {
@@ -4625,10 +4625,10 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 29);function _inter
                     setmealId: item.id };
 
                 } else if (form === '购物车') {
-                  if (item.dishId) {
+                  if (item.dishId || item.productId) {
                     params = _objectSpread(_objectSpread({},
                     params), {}, {
-                      dishId: item.dishId });
+                      productId: item.productId || item.dishId });
 
                   } else {
                     params = {
@@ -4760,7 +4760,7 @@ var _index = __webpack_require__(/*! ../../utils/index.js */ 29);function _inter
         if (CData.length > 0) {
           CData && CData.forEach(function (tg, ind) {
 
-            if (obj.id === tg.dishId) {
+            if (obj.id === tg.productId) {
               obj.dishNumber = tg.number;
               // 对新添加的实时更新newCardNumber字段进行赋值
               // obj.newCardNumber = tg.number
@@ -20078,9 +20078,9 @@ exports.dishListByCategoryId = dishListByCategoryId;var commonDownload = functio
 // 购物车----加菜功能实现
 exports.commonDownload = commonDownload;var addShoppingCart = function addShoppingCart(params) {
   return (0, _request.request)({
-    url: '/user/shoppingCart',
+    url: '/user/shoppingCart/add',
     method: 'POST',
-    params: params });
+    data: params });
 
 };
 
@@ -20118,7 +20118,7 @@ exports.editHoppingCart = editHoppingCart;var newAddShoppingCartAdd = function n
   return (0, _request.request)({
     url: '/user/shoppingCart/add',
     method: 'POST',
-    params: params });
+    data: params });
 
 };
 
@@ -20128,7 +20128,7 @@ exports.newAddShoppingCartAdd = newAddShoppingCartAdd;var newShoppingCartSub = f
   return (0, _request.request)({
     url: '/user/shoppingCart/sub',
     method: 'POST',
-    params: params });
+    data: params });
 
 };
 
@@ -20158,7 +20158,7 @@ exports.queryOrderUserPage = queryOrderUserPage;var submitOrderSubmit = function
   return (0, _request.request)({
     url: '/user/order/submit',
     method: 'POST',
-    params: params });
+    data: params });
 
 };
 
@@ -20312,7 +20312,7 @@ exports.paymentOrder = paymentOrder;var repetitionOrder = function repetitionOrd
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.request = request;var _store = _interopRequireDefault(__webpack_require__(/*! ./../store */ 12));
 var _env = __webpack_require__(/*! ./env */ 26);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 // 参数： url:请求地址  param：请求参数  method：请求方式 callBack：回调函数
-function request(_ref) {var _ref$url = _ref.url,url = _ref$url === void 0 ? '' : _ref$url,_ref$params = _ref.params,params = _ref$params === void 0 ? {} : _ref$params,_ref$method = _ref.method,method = _ref$method === void 0 ? 'GET' : _ref$method;
+function request(_ref) {var _ref$url = _ref.url,url = _ref$url === void 0 ? '' : _ref$url,_ref$params = _ref.params,params = _ref$params === void 0 ? {} : _ref$params,_ref$data = _ref.data,data = _ref$data === void 0 ? null : _ref$data,_ref$method = _ref.method,method = _ref$method === void 0 ? 'GET' : _ref$method;
   uni.getStorage({
     key: '' });
 
@@ -20325,12 +20325,14 @@ function request(_ref) {var _ref$url = _ref.url,url = _ref$url === void 0 ? '' :
     // 'storeid':storeInfo.storeInfo.storeId ?? '',
     'authentication': storeInfo.token };
 
+  // 如果有 data 参数则使用 data，否则使用 params
+  var requestData = data !== null ? data : params;
 
   var requestRes = new Promise(function (resolve, reject) {
     _store.default.commit('setLodding', false);
     uni.request({
       url: _env.baseUrl + url,
-      data: params,
+      data: requestData,
       header: header,
       method: method,
       success: function success(res) {var
