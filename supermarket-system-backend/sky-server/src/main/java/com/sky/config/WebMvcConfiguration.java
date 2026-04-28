@@ -69,7 +69,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtTokenUserInterceptor)
                 .addPathPatterns("/user/**")
                 .excludePathPatterns("/user/user/login")
-                .excludePathPatterns("/user/shop/status");
+                .excludePathPatterns("/user/shop/status")
+                .excludePathPatterns("/user/ai-customer/**");
         
         // 添加用户上下文拦截器，在所有请求之后执行，用于清理ThreadLocal
         registry.addInterceptor(userInterceptor)

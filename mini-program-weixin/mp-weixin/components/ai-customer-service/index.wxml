@@ -1,0 +1,73 @@
+<view class="ai-customer-container">
+  <view class="chat-popup" wx:if="{{showChat}}">
+    <view class="chat-header">
+      <view class="close-btn" bindtap="closeChat">
+        <image class="close-icon" src="../../static/but_close.png" mode="aspectFit"></image>
+      </view>
+      <view class="header-title">
+        <image class="ai-icon" src="../../static/logo.png" mode="aspectFit"></image>
+        <text class="title-text">凡栋超市智能客服</text>
+      </view>
+      <view class="header-placeholder"></view>
+    </view>
+
+    <scroll-view class="chat-messages" scroll-y="true" scroll-into-view="{{scrollId}}" scroll-with-animation="true">
+      <view class="welcome-msg">
+        <view class="msg-avatar">
+          <image class="avatar-img" src="../../static/logo.png" mode="aspectFit"></image>
+        </view>
+        <view class="msg-bubble bot-bubble">
+          <text class="msg-text">您好！我是凡栋超市AI智能客服，有什么可以帮您的？</text>
+        </view>
+      </view>
+
+      <block wx:for="{{messages}}" wx:key="id" wx:for-index="idx">
+        <view class="{{item.type === 'user' ? 'user-msg' : 'welcome-msg'}}" id="msg-{{idx}}">
+          <view class="msg-avatar" wx:if="{{item.type === 'bot'}}">
+            <image class="avatar-img" src="../../static/logo.png" mode="aspectFit"></image>
+          </view>
+          <view class="msg-avatar" wx:if="{{item.type === 'user'}}">
+            <image class="avatar-img user-avatar" src="../../static/boy.png" mode="aspectFit"></image>
+          </view>
+          <view class="msg-bubble {{item.type === 'user' ? 'user-bubble' : 'bot-bubble'}}">
+            <text class="msg-text">{{item.content}}</text>
+          </view>
+        </view>
+      </block>
+
+      <view class="welcome-msg" wx:if="{{loading}}">
+        <view class="msg-avatar">
+          <image class="avatar-img" src="../../static/logo.png" mode="aspectFit"></image>
+        </view>
+        <view class="msg-bubble bot-bubble loading-bubble">
+          <text class="msg-text">思考中...</text>
+        </view>
+      </view>
+
+      <view class="seize-seat"></view>
+    </scroll-view>
+
+    <view class="quick-questions" wx:if="{{messages.length === 0}}">
+      <view class="quick-title">常见问题：</view>
+      <view class="quick-list">
+        <block wx:for="{{quickQuestions}}" wx:key="index">
+          <view class="quick-item" bindtap="sendQuickQuestion" data-question="{{item}}">{{item}}</view>
+        </block>
+      </view>
+    </view>
+
+    <view class="chat-input-area">
+      <view class="input-wrapper">
+        <input class="chat-input" placeholder="请输入您的问题..." value="{{inputValue}}" bindinput="onInput" confirm-type="send" bindconfirm="sendMessage" />
+        <view class="send-btn {{inputValue ? 'active' : ''}}" bindtap="sendMessage">
+          <text>发送</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="ai-btn-float {{showChat ? 'hidden' : ''}}" bindtap="openChat">
+    <image class="ai-btn-icon" src="../../static/logo.png" mode="aspectFit"></image>
+    <text class="ai-btn-text">客服</text>
+  </view>
+</view>

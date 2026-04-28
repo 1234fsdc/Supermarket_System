@@ -3,6 +3,7 @@
   "navigationBarTitleText": "凡栋超市",
   "usingComponents": {
     "nav-bar": "/pages/common/Navbar/navbar",
-    "phone": "/components/uni-phone/index"
+    "phone": "/components/uni-phone/index",
+    "ai-customer": "/components/ai-customer-service/index"
   }
 }
