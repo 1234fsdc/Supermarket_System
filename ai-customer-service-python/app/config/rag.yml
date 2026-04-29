@@ -1,0 +1,52 @@
+# RAG配置
+rag:
+  # 文档分片配置
+  chunk_size: 500
+  chunk_overlap: 50
+  
+  # 检索配置
+  top_k: 3
+  score_threshold: 0.7
+  
+  # 知识库路径
+  knowledge_base_path: "app/data/knowledge_base.json"
+  documents_path: "app/data/documents"
+  
+  # 文件支持格式
+  supported_formats:
+    - ".txt"
+    - ".pdf"
+    - ".md"
+
+# Embedding配置
+embedding:
+  # 使用DashScope的text-embedding-v4模型
+  model: "text-embedding-v4"
+  api_key: ""  # 从环境变量DASHSCOPE_API_KEY读取
+  dimensions: 1536
+
+# 大模型配置
+llm:
+  # 使用通义千问Qwen3-max
+  model: "qwen3-max"
+  api_key: ""  # 从环境变量DASHSCOPE_API_KEY读取
+  temperature: 0.7
+  max_tokens: 2000
+  streaming: true
+
+# 向量数据库配置
+chroma:
+  persist_directory: "app/data/chroma_db"
+  collection_name: "supermarket_knowledge"
+  distance_metric: "cosine"
+
+# Redis配置
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: ""
+  # 对话历史过期时间（秒）
+  session_ttl: 3600
+  # 最大历史消息数
+  max_history: 10

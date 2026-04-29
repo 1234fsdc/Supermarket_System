@@ -1,0 +1,3 @@
+# Agent配置 - 凡栋超市AI客服
+# 外部数据路径（如订单数据、用户数据等）
+external_data_path: data/external/orders.csv

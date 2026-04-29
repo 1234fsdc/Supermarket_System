@@ -1,0 +1,11 @@
+# Chroma向量库配置 - 凡栋超市AI客服
+collection_name: supermarket_knowledge
+persist_directory: chroma_db
+k: 3
+data_path: data
+md5_hex_store: md5.text
+allow_knowledge_file_type: ["txt", "pdf"]
+
+chunk_size: 300
+chunk_overlap: 30
+separators: ["\n\n", "\n", "。", "！", "？", " ", ""]
