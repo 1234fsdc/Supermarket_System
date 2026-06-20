@@ -1,0 +1,29 @@
+<view class="tm-product-card" bindtap="onCard">
+  <view class="img-box">
+    <image class="thumb" src="{{product.image || '/static/imgDefault.png'}}" mode="aspectFill" lazy-load="true" />
+    <block wx:if="{{showBadge && product.promoTag}}">
+      <view class="badge">{{product.promoTag}}</view>
+    </block>
+    <block wx:if="{{product.salesVolume > 0}}">
+      <view class="sold-count">已售 {{product.salesVolume}}+</view>
+    </block>
+  </view>
+  <view class="info-box">
+    <view class="p-name text-ellipsis-2">{{product.name}}</view>
+    <view class="p-meta flex-between">
+      <view class="p-price">
+        <text class="unit">¥</text><text class="val">{{product.price}}</text>
+      </view>
+    </view>
+    <view class="p-action flex-between">
+      <text class="original-price" wx:if="{{product.originalPrice}}">¥{{product.originalPrice}}</text>
+      <view class="btn-group">
+        <block wx:if="{{count > 0}}">
+          <view class="btn-sub" catchtap="onSub">−</view>
+          <text class="num">{{count}}</text>
+        </block>
+        <view class="btn-add" catchtap="onAdd">＋</view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,104 @@
+/* 底部购物车条 - 木东品牌风格 */
+.cart-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110rpx;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 20rpx;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-top: 1rpx solid var(--border-light);
+  z-index: 100;
+  box-shadow: 0 -2rpx 12rpx rgba(0,0,0,0.04);
+}
+
+.left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.cart-icon-box {
+  position: relative;
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart-icon-box.has .cart-emoji {
+  font-size: 44rpx;
+}
+.cart-icon-box .cart-emoji {
+  font-size: 40rpx;
+  transition: font-size 0.2s;
+}
+
+.dot {
+  position: absolute;
+  top: -4rpx;
+  right: -4rpx;
+  min-width: 32rpx;
+  height: 32rpx;
+  border-radius: 16rpx;
+  background: var(--tm-red);
+  color: #fff;
+  font-size: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rpx;
+  border: 2rpx solid #fff;
+}
+
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rpx;
+}
+
+.cart-price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.cart-price .unit {
+  font-size: 22rpx;
+  font-weight: 600;
+}
+.cart-price.empty {
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.cart-extra {
+  font-size: 20rpx;
+  color: var(--text-tertiary);
+}
+
+.checkout-btn {
+  min-width: 200rpx;
+  height: 76rpx;
+  background: #F0F0F0;
+  color: #999;
+  border-radius: 38rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.checkout-btn.ready {
+  background: var(--tm-red-gradient);
+  color: #fff;
+  box-shadow: 0 4rpx 12rpx rgba(255,0,54,0.25);
+}
+.checkout-btn.ready:active {
+  transform: scale(0.96);
+}

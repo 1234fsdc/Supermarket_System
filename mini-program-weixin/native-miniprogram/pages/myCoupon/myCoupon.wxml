@@ -1,0 +1,61 @@
+<view class="my-coupon-page">
+  <view class="mc-header">
+    <view>
+      <text class="mc-title">我的优惠券</text>
+      <text class="mc-sub">下单自动抵扣最优券</text>
+    </view>
+    <text class="mc-grab" bindtap="goReceive">领券中心 ›</text>
+  </view>
+
+  <view class="mc-tabs">
+    <view class="mc-tab {{activeStatus === item.status ? 'active' : ''}}"
+          wx:for="{{tabs}}"
+          wx:key="status"
+          data-status="{{item.status}}"
+          bindtap="onTabChange">
+      {{item.label}}
+    </view>
+  </view>
+
+  <block wx:if="{{list.length === 0}}">
+    <empty icon="🎫" text="暂无优惠券" height="40vh" />
+    <view class="flex-center mt-20">
+      <view class="btn-outline" bindtap="goReceive" style="width:400rpx;">去领券</view>
+    </view>
+  </block>
+
+  <view class="mc-list">
+    <view class="mc-item {{activeStatus === 2 ? 'used' : ''}} {{activeStatus === 3 ? 'expired' : ''}}"
+          wx:for="{{list}}"
+          wx:key="id"
+          wx:for-item="c">
+      <view class="mci-left">
+        <view class="mci-discount">
+          <block wx:if="{{c.discountType === 1}}">
+            <text class="mci-unit">¥</text>
+            <text class="mci-big">{{c.discountBig}}</text>
+          </block>
+          <block wx:else>
+            <text class="mci-big">{{c.discountBig}}</text>
+            <text class="mci-unit">{{c.discountUnit}}</text>
+          </block>
+        </view>
+        <text class="mci-condition">{{c.conditionText}}</text>
+      </view>
+      <view class="mci-divider"></view>
+      <view class="mci-right">
+        <text class="mci-name">{{c.couponName}}</text>
+        <text class="mci-type">{{c.couponType === 1 ? '满减券' : c.couponType === 2 ? '折扣券' : '新人券'}}</text>
+        <text class="mci-date">有效期至 {{c.expireText}}</text>
+      </view>
+      <view class="mci-stamp" wx:if="{{activeStatus !== 1}}">
+        <text wx:if="{{activeStatus === 2}}">已使用</text>
+        <text wx:if="{{activeStatus === 3}}">已过期</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="mc-bottom" wx:if="{{list.length > 0 && activeStatus === 1}}">
+    <view class="btn-primary" bindtap="goUse" style="height:80rpx;display:flex;align-items:center;justify-content:center;">立即使用</view>
+  </view>
+</view>

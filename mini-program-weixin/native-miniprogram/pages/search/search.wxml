@@ -1,0 +1,66 @@
+<view class="search-page">
+  <!-- 搜索栏 -->
+  <view class="search-top">
+    <view class="search-input-box">
+      <text class="s-ico">🔍</text>
+      <input class="s-input" placeholder="搜索木东超市商品" value="{{keyword}}" bindinput="onInput" bindconfirm="onConfirm" focus="{{true}}" confirm-type="search" />
+      <text class="s-clear" wx:if="{{keyword}}" bindtap="setData({keyword:''})">✕</text>
+    </view>
+    <text class="s-cancel" bindtap="goBack">取消</text>
+  </view>
+
+  <block wx:if="{{!searched}}">
+    <!-- 历史搜索 -->
+    <view class="sec" wx:if="{{history.length > 0}}">
+      <view class="sec-head">
+        <text class="sec-title">🕘 历史搜索</text>
+        <text class="sec-action" bindtap="clearHistory">清空</text>
+      </view>
+      <view class="tag-wrap">
+        <view class="tag" wx:for="{{history}}" wx:key="*this" data-kw="{{item}}" bindtap="onHistoryTap">{{item}}</view>
+      </view>
+    </view>
+    <!-- 热门搜索 -->
+    <view class="sec">
+      <view class="sec-head">
+        <text class="sec-title">🔥 热门搜索</text>
+      </view>
+      <view class="tag-wrap">
+        <view class="tag hot {{index < 3 ? 'top3' : ''}}" wx:for="{{hot}}" wx:key="*this" data-kw="{{item}}" bindtap="onHotTap">
+          <text class="rank">{{index + 1}}</text>{{item}}
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 搜索结果 -->
+  <block wx:else>
+    <block wx:if="{{loading}}">
+      <view class="loading-state">搜索中...</view>
+    </block>
+    <block wx:elif="{{results.length === 0}}">
+      <view class="no-result">
+        <text class="nr-icon">🔍</text>
+        <text>未找到"{{keyword}}"相关商品</text>
+        <text class="nr-tip">换个关键词试试</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="result-list">
+        <view class="result-card" wx:for="{{results}}" wx:key="id" data-id="{{item.id}}" bindtap="goDetail" wx:for-item="item">
+          <image class="r-img" src="{{item.image || '/static/imgDefault.png'}}" mode="aspectFill" />
+          <view class="r-info">
+            <view class="r-name text-ellipsis-2">{{item.name}}</view>
+            <view class="r-desc text-ellipsis">{{item.description || ''}}</view>
+            <view class="r-bottom flex-between">
+              <view class="r-price">
+                <text class="unit">¥</text>{{item.price}}
+              </view>
+              <text class="r-sales">已售 {{item.salesVolume || 0}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </block>
+</view>

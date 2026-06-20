@@ -1,0 +1,132 @@
+.my-coupon-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 40rpx;
+}
+
+/* 头部 */
+.mc-header {
+  background: var(--tm-red-gradient);
+  color: #fff;
+  padding: 36rpx 28rpx 56rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.mc-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  display: block;
+}
+.mc-sub {
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  opacity: 0.9;
+  display: block;
+}
+.mc-grab {
+  font-size: 24rpx;
+  background: rgba(255,255,255,0.2);
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+}
+
+/* Tab */
+.mc-tabs {
+  display: flex;
+  background: #fff;
+  margin: -28rpx 20rpx 0;
+  border-radius: var(--radius-lg);
+  padding: 6rpx;
+  box-shadow: var(--shadow-card);
+}
+.mc-tab {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+}
+.mc-tab.active {
+  background: var(--tm-red);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 券列表 */
+.mc-list {
+  margin: 20rpx 20rpx 0;
+}
+.mc-item {
+  display: flex;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  margin-bottom: 16rpx;
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-card);
+}
+.mc-item.used, .mc-item.expired {
+  filter: grayscale(0.7);
+  opacity: 0.55;
+}
+.mci-left {
+  width: 200rpx;
+  background: var(--tm-red-gradient);
+  color: #fff;
+  padding: 28rpx 12rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4rpx;
+}
+.mci-discount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.mci-unit { font-size: 24rpx; }
+.mci-big { font-size: 56rpx; font-weight: 700; }
+.mci-condition { font-size: 22rpx; opacity: 0.95; }
+.mci-divider {
+  width: 2rpx;
+  border-left: 2rpx dashed rgba(255,0,54,0.15);
+  margin: 14rpx 0;
+}
+.mci-right {
+  flex: 1;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6rpx;
+}
+.mci-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.mci-type {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+.mci-date {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+}
+.mci-stamp {
+  position: absolute;
+  right: 20rpx;
+  top: 20rpx;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.mc-bottom {
+  margin: 32rpx 40rpx 0;
+}

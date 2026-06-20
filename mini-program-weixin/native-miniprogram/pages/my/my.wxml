@@ -1,0 +1,108 @@
+<view class="my-page">
+  <!-- ===== 自定义导航栏 ===== -->
+  <view class="custom-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-bar">
+      <view class="nav-back" bindtap="goBack">
+        <text class="nav-back-arrow">‹</text>
+      </view>
+      <text class="nav-title">个人中心</text>
+      <view class="nav-placeholder"></view>
+    </view>
+  </view>
+
+  <!-- ===== 用户信息区 ===== -->
+  <view class="user-section">
+    <block wx:if="{{isLoggedIn && userInfo}}">
+      <view class="user-top-bar">
+        <view class="user-avatar">{{userInfo.name ? userInfo.name.charAt(0).toUpperCase() : 'U'}}</view>
+        <view class="user-detail">
+          <text class="user-nick">{{userInfo.name || '微信用户'}}</text>
+        </view>
+      </view>
+      <!-- 数据统计 - 仅已实现的功能 -->
+      <view class="user-stats-row">
+        <view class="us-item" wx:for="{{userStats}}" wx:key="id" data-page="{{item.page}}" bindtap="onFuncTap">
+          <text class="us-num">{{item.value}}</text>
+          <text class="us-lbl">{{item.label}}</text>
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="user-top-bar">
+        <view class="user-avatar gray">👤</view>
+        <view class="login-hint" bindtap="goLogin">
+          <text wx:if="{{!loggingIn}}">点击登录账号</text>
+          <text wx:else>登录中...</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- ===== 订单状态 ===== -->
+  <view class="section-card mt-0">
+    <view class="sec-head flex-between">
+      <text class="sec-title">我的订单</text>
+      <text class="sec-more" bindtap="goAllOrders">查看全部 ›</text>
+    </view>
+    <view class="order-status-row">
+      <view class="os-item" data-status="1" bindtap="goOrder">
+        <view class="os-icon-wrap"><text class="os-icon">💰</text></view>
+        <text class="os-lbl">待付款</text>
+        <view class="os-badge" wx:if="{{stats.unpaid > 0}}">{{stats.unpaid}}</view>
+      </view>
+      <view class="os-item" data-status="2" bindtap="goOrder">
+        <view class="os-icon-wrap"><text class="os-icon">📋</text></view>
+        <text class="os-lbl">待接单</text>
+        <view class="os-badge" wx:if="{{stats.pending > 0}}">{{stats.pending}}</view>
+      </view>
+      <view class="os-item" data-status="4" bindtap="goOrder">
+        <view class="os-icon-wrap"><text class="os-icon">🚚</text></view>
+        <text class="os-lbl">配送中</text>
+        <view class="os-badge" wx:if="{{stats.shipping > 0}}">{{stats.shipping}}</view>
+      </view>
+      <view class="os-item" data-status="5" bindtap="goOrder">
+        <view class="os-icon-wrap"><text class="os-icon">✅</text></view>
+        <text class="os-lbl">已完成</text>
+      </view>
+      <view class="os-item" data-status="6" bindtap="goOrder">
+        <view class="os-icon-wrap"><text class="os-icon">↩️</text></view>
+        <text class="os-lbl">已取消</text>
+      </view>
+    </view>
+
+    <!-- 最近订单 -->
+    <view class="recent-card" wx:if="{{recentOrder}}" bindtap="goAllOrders" hover-class="scale-active">
+      <view class="rc-head flex-between">
+        <text class="rc-shop">🏪 木东超市</text>
+        <text class="tm-tag tag-status-{{recentOrder.status}}">{{recentOrder.status === 1 ? '待付款' : recentOrder.status === 2 ? '待接单' : recentOrder.status === 3 ? '已接单' : recentOrder.status === 4 ? '配送中' : recentOrder.status === 5 ? '已完成' : '已取消'}}</text>
+      </view>
+      <view class="rc-imgs">
+        <block wx:for="{{recentOrder.orderDetailList || []}}" wx:key="id" wx:for-item="d">
+          <image class="rc-img" src="{{d.image || '/static/imgDefault.png'}}" mode="aspectFill" />
+        </block>
+      </view>
+      <view class="rc-foot flex-between">
+        <text class="rc-amount">¥{{recentOrder.amount}}</text>
+        <text class="rc-time">{{recentOrder.orderTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 功能宫格 - 仅已实现功能 ===== -->
+  <view class="section-card">
+    <text class="sec-title">我的服务</text>
+    <view class="func-grid">
+      <view class="func-item" wx:for="{{funcEntries}}" wx:key="id" data-page="{{item.page}}" bindtap="onFuncTap" hover-class="scale-active">
+        <view class="func-icon" style="background: {{item.bg}};">
+          <text style="color: {{item.color}};">{{item.icon}}</text>
+        </view>
+        <text class="func-lbl">{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 退出登录 ===== -->
+  <view class="logout-section" wx:if="{{isLoggedIn}}" bindtap="onLogout" hover-class="scale-active">
+    <text class="logout-text">退出登录</text>
+  </view>
+</view>

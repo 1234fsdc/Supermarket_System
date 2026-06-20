@@ -1,0 +1,143 @@
+.address-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 130rpx;
+}
+
+.address-list {
+  padding: 20rpx;
+}
+
+.address-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+  box-shadow: var(--shadow-card);
+}
+.address-card.default {
+  border-left: 6rpx solid var(--tm-red);
+}
+
+.card-top {
+  margin-bottom: 16rpx;
+}
+
+.line-1 {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  flex-wrap: wrap;
+}
+
+.name {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.phone {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+}
+
+.tag {
+  font-size: 20rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+.tag-home {
+  background: var(--bg-tag-red);
+  color: var(--tm-red);
+}
+.tag-company {
+  background: #E8F5FF;
+  color: #1677FF;
+}
+.tag-school {
+  background: #FFF5EB;
+  color: #FF6A00;
+}
+
+.default-badge {
+  font-size: 20rpx;
+  background: var(--tm-red);
+  color: #fff;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.line-2 {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
+  border-top: 1rpx solid var(--border-light);
+}
+
+.default-radio {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+
+.radio {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 50%;
+  border: 2rpx solid var(--border-medium);
+}
+.radio.on {
+  background: var(--tm-red);
+  border-color: var(--tm-red);
+}
+
+.actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+  font-size: 22rpx;
+  color: var(--text-secondary);
+  padding: 8rpx 16rpx;
+  background: #F5F5F5;
+  border-radius: 24rpx;
+}
+
+/* 底部新增 */
+.add-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1rpx solid var(--border-light);
+}
+
+.add-btn {
+  height: 88rpx;
+  background: var(--tm-red-gradient);
+  color: #fff;
+  border-radius: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 700;
+  box-shadow: 0 4rpx 12rpx rgba(255,0,54,0.2);
+}

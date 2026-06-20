@@ -1,0 +1,42 @@
+<view class="coupon-page">
+  <view class="coupon-header">
+    <view class="ch-content">
+      <text class="ch-title">领券中心</text>
+      <text class="ch-sub">每日 10 点更新，先到先得</text>
+    </view>
+    <text class="ch-my-btn" bindtap="goMyCoupon">我的 ›</text>
+  </view>
+
+  <block wx:if="{{coupons.length === 0 && !loading}}">
+    <empty icon="🎫" text="暂无可领取优惠券" height="40vh" />
+  </block>
+
+  <view class="coupon-list">
+    <view class="coupon-card" wx:for="{{coupons}}" wx:key="id" wx:for-item="c">
+      <view class="cc-left">
+        <view class="cc-discount">
+          <block wx:if="{{c.discountType === 1}}">
+            <text class="cc-unit">¥</text>
+            <text class="cc-big">{{c.discountBig}}</text>
+          </block>
+          <block wx:else>
+            <text class="cc-big">{{c.discountBig}}</text>
+            <text class="cc-unit">{{c.discountUnit}}</text>
+          </block>
+        </view>
+        <text class="cc-condition">{{c.conditionText}}</text>
+      </view>
+      <view class="cc-divider"></view>
+      <view class="cc-right">
+        <text class="cc-name">{{c.name}}</text>
+        <text class="cc-type">{{c.discountType === 1 ? '满减券' : c.discountType === 2 ? '折扣券' : '新人券'}}</text>
+        <text class="cc-remain">剩余 {{c.remainCount}}/{{c.totalCount}}</text>
+        <view class="cc-btn {{receivedIds[c.id] ? 'done' : ''}}"
+              data-id="{{c.id}}"
+              bindtap="onReceive">
+          {{receivedIds[c.id] ? '已领取' : '立即领取'}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

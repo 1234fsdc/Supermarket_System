@@ -1,0 +1,78 @@
+<view class="seckill-page">
+  <uni-nav-bar left-icon="back" leftIcon="arrowleft" title="限时秒杀" statusBar="true" fixed="true" color="#ffffff" backgroundColor="#E95F3C" bind:clickLeft="goBack"></uni-nav-bar>
+  
+  <view class="seckill-content">
+    <!-- 活动头部信息 -->
+    <view class="activity-header">
+      <view class="activity-title">每日限时秒杀</view>
+      <view class="countdown-box">
+        <text class="countdown-label">距离结束</text>
+        <view class="countdown-time">
+          <text class="time-num">{{countdown.hours}}</text>
+          <text class="time-sep">:</text>
+          <text class="time-num">{{countdown.minutes}}</text>
+          <text class="time-sep">:</text>
+          <text class="time-num">{{countdown.seconds}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 秒杀商品列表 -->
+    <scroll-view scroll-y="true" class="seckill-list" style="height: {{scrollHeight}}px;">
+      <block wx:if="{{productList.length > 0}}">
+        <view wx:for="{{productList}}" wx:key="id" class="seckill-item">
+          <view class="product-image-box">
+            <image class="product-image" src="{{item.image || '../../static/imgDefault.png'}}" mode="aspectFill"></image>
+            <view class="seckill-tag">秒杀</view>
+            <view class="sold-progress" wx:if="{{item.seckillStock > 0}}">
+              <view class="progress-bar">
+                <view class="progress-fill" style="width: {{(item.soldCount / (item.seckillStock + item.soldCount)) * 100}}%"></view>
+              </view>
+              <text class="progress-text">已抢{{item.soldCount}}件</text>
+            </view>
+            <view class="sold-out-mask" wx:if="{{item.seckillStock <= 0}}">
+              <text class="sold-out-text">已抢光</text>
+            </view>
+          </view>
+          
+          <view class="product-info">
+            <view class="product-name">{{item.name}}</view>
+            <view class="product-desc">{{item.description || '限时特惠，超值抢购'}}</view>
+            
+            <view class="price-box">
+              <view class="seckill-price">
+                <text class="currency">¥</text>
+                <text class="price">{{item.seckillPrice}}</text>
+              </view>
+              <view class="original-price">
+                <text class="currency">¥</text>
+                <text class="price">{{item.originalPrice}}</text>
+              </view>
+            </view>
+            
+            <view class="action-box">
+              <view class="stock-info">
+                <text wx:if="{{item.seckillStock > 0}}">剩余{{item.seckillStock}}件</text>
+                <text wx:else class="no-stock">已售罄</text>
+              </view>
+              <view class="limit-info">每人限{{item.limitPerUser}}件</view>
+            </view>
+            
+            <button class="buy-btn {{item.seckillStock <= 0 ? 'disabled' : ''}}" 
+                    bindtap="buyNow" 
+                    data-id="{{item.id}}"
+                    disabled="{{item.seckillStock <= 0}}">
+              {{item.seckillStock > 0 ? '立即抢购' : '已抢光'}}
+            </button>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{productList.length === 0 && !loading}}">
+        <image class="empty-icon" src="../../static/no_order.png" mode="aspectFit"></image>
+        <view class="empty-text">暂无秒杀商品</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

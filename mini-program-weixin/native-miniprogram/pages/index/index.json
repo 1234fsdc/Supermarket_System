@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#FF0036",
+  "usingComponents": {
+    "flash-card": "/components/flash-card/flash-card",
+    "seckill-bar": "/components/seckill-bar/seckill-bar",
+    "category-tabs": "/components/category-tabs/category-tabs",
+    "cart-bar": "/components/cart-bar/cart-bar",
+    "empty": "/components/empty/empty"
+  }
+}

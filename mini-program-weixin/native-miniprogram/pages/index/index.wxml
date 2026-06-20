@@ -1,0 +1,98 @@
+<view class="page-container">
+  <!-- ===== 木东风格头部 ===== -->
+  <view class="index-header" style="padding-top: {{statusBarHeight}}px;">
+    <view class="header-bar">
+      <view class="brand-area">
+        <text class="brand-name">木东</text>
+        <text class="brand-sub">精选超市</text>
+      </view>
+      <view class="search-bar" bindtap="onSearchTap">
+        <text class="search-icon">🔍</text>
+        <text class="search-text">搜索木东超市商品</text>
+      </view>
+      <view class="header-actions">
+        <text class="h-icon" bindtap="goMy">👤</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 店铺信息卡 ===== -->
+  <view class="shop-card">
+    <view class="shop-top flex-between">
+      <view class="shop-left flex gap-12">
+        <view class="shop-logo">木</view>
+        <view>
+          <view class="shop-name-row flex gap-8">
+            <text class="shop-name">{{shopInfo.name || '木东超市'}}</text>
+            <text class="status-tag {{shopInfo.status === 1 ? 'open' : ''}}">{{shopInfo.status === 1 ? '营业中' : '休息中'}}</text>
+          </view>
+          <text class="shop-desc">自营精选 · 正品保障 · 极速达</text>
+        </view>
+      </view>
+      <text class="arrow">›</text>
+    </view>
+
+  </view>
+
+
+  <!-- ===== 个人中心入口 ===== -->
+  <view class="my-entry-card" bindtap="goMy" hover-class="scale-active">
+    <view class="my-entry-left flex gap-12">
+      <view class="my-entry-avatar">
+        <text>{{userInfo.name ? userInfo.name.charAt(0).toUpperCase() : '👤'}}</text>
+      </view>
+      <view class="my-entry-info">
+        <text class="my-entry-title">{{userInfo.name || '点击登录账号'}}</text>
+        <text class="my-entry-desc">{{isLoggedIn ? '查看订单、优惠券、收货地址' : '登录后享受更多服务'}}</text>
+      </view>
+    </view>
+    <text class="arrow">›</text>
+  </view>
+
+  <!-- ===== 分类 + 商品主体 ===== -->
+  <view class="main-body">
+    <view class="cat-pane">
+      <category-tabs
+        list="{{categories}}"
+        active-id="{{activeCategoryId}}"
+        bind:change="onCategoryChange"
+      />
+    </view>
+    <scroll-view class="goods-pane" scroll-y="true" enhanced="true" show-scrollbar="false">
+      <view class="section-title hot-title-row">
+        <text>🔥 热卖推荐</text>
+        <text class="more">查看全部 ›</text>
+      </view>
+
+      <block wx:if="{{loading}}">
+        <view class="loading">加载中...</view>
+      </block>
+      <block wx:elif="{{products.length === 0}}">
+        <empty icon="📦" text="该分类暂无商品" height="30vh" />
+      </block>
+      <block wx:else>
+        <view class="goods-grid">
+          <block wx:for="{{products}}" wx:key="id" wx:for-item="p">
+            <flash-card
+              product="{{p}}"
+              count="{{productMap[p.id] || 0}}"
+              bind:cardtap="onCardTap"
+              bind:addtap="onAdd"
+              bind:subtap="onSub"
+            />
+          </block>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+
+  <!-- ===== 底部购物车条 ===== -->
+  <cart-bar
+    total-count="{{cartCount}}"
+    total-price="{{cartTotal}}"
+    delivery-fee="{{shopInfo.deliveryFee || 0}}"
+    min-order="{{shopInfo.minOrder || 29}}"
+    bind:carttap="onCartTap"
+    bind:checkouttap="onCheckout"
+  />
+</view>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.CouponTemplateMapper">
+
+    <select id="pageQuery" resultType="com.sky.vo.CouponTemplateVO">
+        SELECT
+            id, name, type, discount_type, discount_value, min_spend, max_discount,
+            total_count, remain_count, limit_per_user, valid_days,
+            start_time, end_time, status, scope_type, scope_ids,
+            create_time, update_time
+        FROM coupon_template
+        <where>
+            <if test="query.name != null and query.name != ''">
+                AND name LIKE CONCAT('%', #{query.name}, '%')
+            </if>
+            <if test="query.type != null">
+                AND type = #{query.type}
+            </if>
+            <if test="query.status != null">
+                AND status = #{query.status}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+    </select>
+
+</mapper>

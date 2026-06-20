@@ -1,0 +1,27 @@
+/* 秒杀迷你条 */
+.sk-mini-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 12rpx;
+  background: linear-gradient(135deg, #FFF0F3 0%, #FFE0E5 100%);
+  border: 1rpx solid rgba(255,0,54,0.1);
+  border-radius: var(--radius-round);
+  padding: 6rpx 16rpx;
+}
+.sk-mini-left {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+.sk-mini-icon { font-size: 24rpx; }
+.sk-mini-time {
+  font-family: "Courier New", monospace;
+  font-size: 22rpx;
+  font-weight: 700;
+  color: var(--tm-red);
+}
+.sk-mini-more {
+  font-size: 22rpx;
+  color: var(--tm-red);
+  font-weight: 500;
+}

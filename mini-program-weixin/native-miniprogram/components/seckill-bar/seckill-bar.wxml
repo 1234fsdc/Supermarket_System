@@ -1,0 +1,9 @@
+<view class="sk-mini-bar" bindtap="onTap">
+  <view class="sk-mini-left">
+    <text class="sk-mini-icon">⚡</text>
+    <text class="sk-mini-time">{{countdownText}}</text>
+  </view>
+  <view class="sk-mini-right">
+    <text class="sk-mini-more">去抢购 ›</text>
+  </view>
+</view>

@@ -1,0 +1,42 @@
+/* 分类侧栏 - 木东风格 */
+.cat-tabs {
+  height: 100%;
+  background: #FAFAFA;
+}
+
+.cat-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24rpx 12rpx;
+  position: relative;
+  min-height: 80rpx;
+}
+
+.cat-text {
+  font-size: 24rpx;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.cat-item.active {
+  background: #fff;
+}
+
+.cat-item.active .cat-text {
+  color: var(--tm-red);
+  font-weight: 700;
+  font-size: 26rpx;
+}
+
+.cat-bar {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4rpx;
+  height: 32rpx;
+  background: var(--tm-red);
+  border-radius: 2rpx;
+}

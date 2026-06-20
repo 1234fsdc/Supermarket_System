@@ -1,0 +1,116 @@
+.coupon-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 40rpx;
+}
+
+/* 头部 */
+.coupon-header {
+  background: var(--tm-red-gradient);
+  color: #fff;
+  padding: 36rpx 28rpx 56rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.ch-title {
+  font-size: 44rpx;
+  font-weight: 700;
+  display: block;
+}
+.ch-sub {
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  opacity: 0.9;
+  display: block;
+}
+.ch-my-btn {
+  font-size: 24rpx;
+  background: rgba(255,255,255,0.2);
+  padding: 8rpx 20rpx;
+  border-radius: 24rpx;
+}
+
+/* 券列表 */
+.coupon-list {
+  margin: -28rpx 20rpx 0;
+}
+.coupon-card {
+  display: flex;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.cc-left {
+  width: 200rpx;
+  background: var(--tm-red-gradient);
+  color: #fff;
+  padding: 28rpx 12rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6rpx;
+}
+.cc-discount {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
+.cc-unit {
+  font-size: 24rpx;
+}
+.cc-big {
+  font-size: 56rpx;
+  font-weight: 700;
+}
+.cc-condition {
+  font-size: 22rpx;
+  opacity: 0.95;
+}
+.cc-divider {
+  width: 2rpx;
+  border-left: 2rpx dashed rgba(255,0,54,0.2);
+  margin: 16rpx 0;
+}
+.cc-right {
+  flex: 1;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+.cc-name {
+  font-size: 28rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.cc-type {
+  font-size: 22rpx;
+  color: var(--text-secondary);
+}
+.cc-remain {
+  font-size: 20rpx;
+  color: var(--text-tertiary);
+}
+.cc-btn {
+  margin-top: 6rpx;
+  height: 56rpx;
+  background: var(--tm-red);
+  color: #fff;
+  border-radius: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  padding: 0 28rpx;
+  align-self: flex-end;
+  width: fit-content;
+}
+.cc-btn.done {
+  background: #F0F0F0;
+  color: #999;
+}

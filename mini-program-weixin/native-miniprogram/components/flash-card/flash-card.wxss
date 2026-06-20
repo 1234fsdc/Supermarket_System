@@ -1,0 +1,114 @@
+/* 木东风格商品卡片 */
+.tm-product-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform 0.2s;
+  box-shadow: 0 1rpx 6rpx rgba(0,0,0,0.04);
+}
+.tm-product-card:active {
+  transform: scale(0.97);
+}
+
+.img-box {
+  position: relative;
+  width: 100%;
+  height: 320rpx;
+  background: #f8f8f8;
+}
+.thumb {
+  width: 100%;
+  height: 100%;
+}
+.badge {
+  position: absolute;
+  top: 10rpx;
+  left: 10rpx;
+  background: var(--tm-red-gradient);
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 700;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+}
+.sold-count {
+  position: absolute;
+  bottom: 8rpx;
+  left: 8rpx;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 18rpx;
+  padding: 2rpx 10rpx;
+  border-radius: 6rpx;
+}
+
+.info-box {
+  padding: 14rpx 12rpx 12rpx;
+}
+.p-name {
+  font-size: 26rpx;
+  color: var(--text-primary);
+  line-height: 1.4;
+  min-height: 72rpx;
+}
+.p-meta {
+  margin-top: 8rpx;
+}
+.p-price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--tm-red);
+}
+.p-price .unit { font-size: 22rpx; }
+.p-price .val { font-size: 30rpx; }
+.rank-tag {
+  font-size: 20rpx;
+  color: var(--tm-yellow);
+  font-weight: 600;
+}
+.p-action {
+  margin-top: 10rpx;
+  align-items: center;
+}
+.original-price {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+.btn-sub {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: var(--bg-tag-red);
+  color: var(--tm-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.num {
+  min-width: 36rpx;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.btn-add {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: var(--tm-red);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  box-shadow: 0 2rpx 8rpx rgba(255,0,54,0.2);
+}

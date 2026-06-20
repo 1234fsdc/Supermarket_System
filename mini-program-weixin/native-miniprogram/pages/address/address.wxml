@@ -1,0 +1,47 @@
+<view class="address-page">
+  <block wx:if="{{list.length === 0}}">
+    <empty icon="📍" text="一个地址都没有哦~" height="50vh" />
+  </block>
+  <block wx:else>
+    <view class="address-list">
+      <view class="address-card {{item.isDefault === 1 ? 'default' : ''}}"
+            wx:for="{{list}}"
+            wx:key="id"
+            wx:for-item="item"
+            data-addr="{{item}}"
+            bindtap="onSelect">
+        <view class="card-top">
+          <view class="info">
+            <view class="line-1">
+              <text class="name">{{item.consignee}}</text>
+              <text class="phone">{{item.phone}}</text>
+              <text class="tag tag-home" wx:if="{{item.label === 'home'}}">家</text>
+              <text class="tag tag-company" wx:elif="{{item.label === 'company'}}">公司</text>
+              <text class="tag tag-school" wx:elif="{{item.label === 'school'}}">学校</text>
+              <text class="default-badge" wx:if="{{item.isDefault === 1}}">默认</text>
+            </view>
+            <view class="line-2">{{item.provinceName}}{{item.cityName}}{{item.districtName}}{{item.detail}}</view>
+          </view>
+        </view>
+        <view class="card-bottom">
+          <view class="default-radio" catchtap="setDefault" data-id="{{item.id}}">
+            <view class="radio {{item.isDefault === 1 ? 'on' : ''}}"></view>
+            <text>设为默认</text>
+          </view>
+          <view class="actions">
+            <view class="action-btn" catchtap="goEdit" data-id="{{item.id}}">
+              <text>✏️</text><text>编辑</text>
+            </view>
+            <view class="action-btn" catchtap="onDelete" data-id="{{item.id}}">
+              <text>🗑</text><text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <view class="add-bar safe-bottom">
+    <view class="add-btn" bindtap="goAdd">＋ 新增收货地址</view>
+  </view>
+</view>

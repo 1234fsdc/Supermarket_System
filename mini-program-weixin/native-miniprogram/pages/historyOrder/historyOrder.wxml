@@ -1,0 +1,58 @@
+<view class="order-list-page">
+  <!-- Tab 栏 -->
+  <scroll-view class="tab-bar" scroll-x="true" show-scrollbar="false">
+    <view class="tab-item {{activeStatus === item.status || (activeStatus === '' && item.status === '') ? 'active' : ''}}"
+          wx:for="{{tabs}}"
+          wx:key="status"
+          data-status="{{item.status}}"
+          bindtap="onTabChange">
+      {{item.label}}
+    </view>
+  </scroll-view>
+
+  <block wx:if="{{list.length === 0 && !loading}}">
+    <empty icon="📋" text="暂无订单" height="50vh" />
+  </block>
+  <block wx:else>
+    <view class="order-list">
+      <view class="order-card" wx:for="{{list}}" wx:key="id" wx:for-item="o">
+        <view class="oc-head">
+          <text>🏪 木东超市</text>
+          <text class="oc-status {{'tag-status-'+o.status}}">{{o.statusText}}</text>
+        </view>
+        <view class="oc-body" bindtap="goDetail" data-id="{{o.id}}">
+          <block wx:if="{{o.orderDetailList && o.orderDetailList.length > 0}}">
+            <block wx:for="{{o.orderDetailList}}" wx:key="id" wx:for-item="d">
+              <image class="oc-img" src="{{d.image || '/static/imgDefault.png'}}" mode="aspectFill" />
+            </block>
+          </block>
+          <view class="oc-summary">
+            <text>{{o.orderDetailList.length || 0}}件商品</text>
+            <text class="oc-time">{{o.timeText}}</text>
+          </view>
+        </view>
+        <view class="oc-foot">
+          <view class="oc-amount">
+            <text>合计</text>
+            <text class="oc-price">¥{{o.amount}}</text>
+          </view>
+          <view class="oc-actions">
+            <block wx:if="{{o.status === 1}}">
+              <view class="btn-sm-outline" catchtap="onCancel" data-id="{{o.id}}">取消</view>
+              <view class="btn-sm-primary" catchtap="onPay" data-id="{{o.id}}" data-amount="{{o.amount}}">去支付</view>
+            </block>
+            <block wx:elif="{{o.status === 2 || o.status === 3 || o.status === 4}}">
+              <view class="btn-sm-outline" catchtap="onCancel" data-id="{{o.id}}">取消</view>
+            </block>
+            <block wx:elif="{{o.status === 5 || o.status === 6}}">
+              <view class="btn-sm-primary" catchtap="onReorder" data-id="{{o.id}}">再来一单</view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="loading" wx:if="{{loading}}">加载中...</view>
+    <view class="nomore" wx:if="{{!hasMore && list.length > 0}}">— 没有更多了 —</view>
+  </block>
+</view>

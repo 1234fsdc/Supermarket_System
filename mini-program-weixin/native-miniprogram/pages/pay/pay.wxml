@@ -1,0 +1,43 @@
+<view class="pay-page">
+  <!-- 金额卡片 -->
+  <view class="amount-section">
+    <text class="a-label">支付金额</text>
+    <view class="a-value">
+      <text class="unit">¥</text>{{amount}}
+    </view>
+    <view class="a-countdown">
+      <text>⏰ 剩余</text>
+      <text class="cd-box">{{cdText}}</text>
+      <text>内完成支付</text>
+    </view>
+  </view>
+
+  <!-- 支付方式 -->
+  <view class="method-card">
+    <view class="m-title">选择支付方式</view>
+    <view class="m-item {{payMethod === 1 ? 'active' : ''}}" data-method="1" bindtap="selectMethod">
+      <view class="m-icon" style="background:#1AAD19;">💚</view>
+      <view class="m-info">
+        <text class="m-name">微信支付</text>
+        <text class="m-desc">推荐使用</text>
+      </view>
+      <view class="m-radio {{payMethod === 1 ? 'on' : ''}}"></view>
+    </view>
+    <view class="m-item {{payMethod === 2 ? 'active' : ''}}" data-method="2" bindtap="selectMethod">
+      <view class="m-icon" style="background:#1677FF;">💙</view>
+      <view class="m-info">
+        <text class="m-name">支付宝</text>
+        <text class="m-desc">支持花呗</text>
+      </view>
+      <view class="m-radio {{payMethod === 2 ? 'on' : ''}}"></view>
+    </view>
+  </view>
+
+  <!-- 底部 -->
+  <view class="pay-bottom safe-bottom">
+    <view class="p-cancel" bindtap="onCancel">取消支付</view>
+    <view class="btn-primary {{paying ? 'disabled' : ''}}" bindtap="onPay" style="flex:1;display:flex;align-items:center;justify-content:center;height:88rpx;">
+      {{paying ? '支付中...' : '确认支付 ¥' + amount}}
+    </view>
+  </view>
+</view>

@@ -1,0 +1,179 @@
+<view class="detail-page">
+  <!-- 图片轮播 -->
+  <swiper class="banner" indicator-dots="{{true}}" indicator-color="rgba(255,255,255,0.4)" indicator-active-color="#FF0036" circular="{{true}}" autoplay="{{false}}">
+    <block wx:for="{{detailImages}}" wx:key="*this">
+      <swiper-item>
+        <image class="banner-img" src="{{item || '/static/imgDefault.png'}}" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 价格与基础信息区 -->
+  <view class="info-section">
+    <view class="price-row">
+      <text class="price-big"><text class="unit">¥</text>{{product.priceText || product.price}}</text>
+      <text class="price-old" wx:if="{{product.originalPrice}}">¥{{product.originalPrice}}</text>
+      <text class="sales-badge" wx:if="{{product.salesVolume}}">已售 {{product.salesVolume}}+</text>
+    </view>
+    <view class="name-row">
+      <text class="pro-name">{{product.name}}</text>
+      <text class="pro-desc">{{product.description || '木东超市 品质保障'}}</text>
+    </view>
+    <view class="service-row" wx:if="{{product.promoTag}}">
+      <text class="tm-tag tm-tag-white" style="background:var(--tm-red);color:#fff;">{{product.promoTag}}</text>
+    </view>
+    <!-- 服务标签 -->
+    <view class="service-tags">
+      <text>🚚 极速达</text>
+      <text>✅ 正品保障</text>
+      <text>🔄 7天退换</text>
+      <text>💰 满99减20</text>
+    </view>
+    <!-- 配送信息 -->
+    <view class="delivery-row flex-between">
+      <text class="delivery-label">配送</text>
+      <text class="delivery-val">¥0 运费 · 最快30分钟送达</text>
+    </view>
+  </view>
+
+  <!-- 规格选择 -->
+  <view class="spec-row" bindtap="openSpec">
+    <view class="spec-left">
+      <text class="spec-label">已选</text>
+      <text class="spec-value">{{specCount}}份</text>
+    </view>
+    <view class="spec-right">
+      <text class="spec-desc">请选择规格</text>
+      <text class="spec-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 详情 Tab -->
+  <view class="detail-tabs">
+    <view class="tab-item {{detailTab === 0 ? 'active' : ''}}" data-idx="0" bindtap="switchTab">商品</view>
+    <view class="tab-item {{detailTab === 1 ? 'active' : ''}}" data-idx="1" bindtap="switchTab">评价 ({{mockReviews.length}})</view>
+    <view class="tab-item {{detailTab === 2 ? 'active' : ''}}" data-idx="2" bindtap="switchTab">详情</view>
+  </view>
+
+  <!-- Tab 内容：商品 -->
+  <block wx:if="{{detailTab === 0}}">
+    <view class="section-card">
+      <view class="sec-title">📦 商品参数</view>
+      <view class="param-list">
+        <view class="param-item"><text class="param-label">品牌</text><text>木东超市</text></view>
+        <view class="param-item"><text class="param-label">产地</text><text>详见包装</text></view>
+        <view class="param-item"><text class="param-label">保质期</text><text>详见包装</text></view>
+        <view class="param-item"><text class="param-label">储存方式</text><text>阴凉干燥处</text></view>
+      </view>
+    </view>
+
+    <view class="section-card">
+      <view class="sec-title flex-between">
+        <text>📝 用户评价 ({{mockReviews.length}})</text>
+        <text class="sec-more">查看全部 ›</text>
+      </view>
+      <block wx:if="{{mockReviews.length > 0}}">
+        <view class="review-item" wx:for="{{mockReviews}}" wx:key="index" wx:for-item="r">
+          <view class="review-top flex-between">
+            <view class="review-user flex gap-8">
+              <text class="review-avatar">{{r.avatar}}</text>
+              <text>{{r.user}}</text>
+              <text class="review-spec">{{r.spec}}</text>
+            </view>
+            <text class="review-stars">{{r.stars}}</text>
+          </view>
+          <text class="review-content">{{r.content}}</text>
+          <text class="review-time">{{r.time}}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="comment-empty"><text>暂无评价，期待您的分享</text></view>
+      </block>
+    </view>
+  </block>
+
+  <!-- Tab 内容：评价 -->
+  <block wx:elif="{{detailTab === 1}}">
+    <view class="section-card">
+      <block wx:if="{{mockReviews.length > 0}}">
+        <view class="review-item" wx:for="{{mockReviews}}" wx:key="index" wx:for-item="r">
+          <view class="review-top flex-between">
+            <view class="review-user flex gap-8">
+              <text class="review-avatar">{{r.avatar}}</text>
+              <text>{{r.user}}</text>
+              <text class="review-spec">{{r.spec}}</text>
+            </view>
+            <text class="review-stars">{{r.stars}}</text>
+          </view>
+          <text class="review-content">{{r.content}}</text>
+          <text class="review-time">{{r.time}}</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="comment-empty"><text>暂无评价</text></view>
+      </block>
+    </view>
+  </block>
+
+  <!-- Tab 内容：详情 -->
+  <block wx:elif="{{detailTab === 2}}">
+    <view class="section-card">
+      <view class="sec-title">📦 商品详情</view>
+      <view class="detail-content" wx:if="{{product.image}}">
+        <image class="detail-img" src="{{product.image}}" mode="widthFix" />
+      </view>
+      <view class="detail-attr-list">
+        <text>· 品牌：木东超市</text>
+        <text>· 产地：详见包装</text>
+        <text>· 保质期：详见包装</text>
+        <text>· 储存方式：阴凉干燥处</text>
+        <text>· 规格：以实际商品为准</text>
+      </view>
+    </view>
+  </block>
+
+  <view class="bottom-holder"></view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-action safe-bottom">
+    <view class="act-icon" bindtap="goHome">
+      <text class="act-ico">🏠</text>
+      <text class="act-lbl">首页</text>
+    </view>
+    <view class="act-icon" bindtap="goCart">
+      <view class="cart-badge-wrap">
+        <text class="act-ico">🛒</text>
+        <view class="badge-num" wx:if="{{cartCount > 0}}">{{cartCount}}</view>
+      </view>
+      <text class="act-lbl">购物车</text>
+    </view>
+    <view class="action-btn-wrap">
+      <view class="btn-add-cart" bindtap="onAdd">加入购物车</view>
+      <view class="btn-buy-now" bindtap="onBuyNow">立即购买</view>
+    </view>
+  </view>
+
+  <!-- 规格弹窗 -->
+  <view class="mask" wx:if="{{showSpecPopup}}" bindtap="closeSpec">
+    <view class="popup" catchtap="">
+      <view class="popup-top">
+        <image class="popup-img" src="{{product.image || '/static/imgDefault.png'}}" mode="aspectFill" />
+        <view class="popup-info">
+          <view class="popup-price"><text class="unit">¥</text>{{product.priceText || product.price}}</view>
+          <view class="popup-stock">库存 {{product.stock || 999}} 件</view>
+        </view>
+        <text class="popup-close" catchtap="closeSpec">✕</text>
+      </view>
+      <view class="popup-section">
+        <text class="popup-section-title">数量</text>
+        <view class="qty-ctl">
+          <view class="qty-btn" bindtap="onSpecMinus">−</view>
+          <text class="qty-val">{{specCount}}</text>
+          <view class="qty-btn" bindtap="onSpecPlus">＋</view>
+        </view>
+      </view>
+      <view class="popup-confirm" bindtap="onSpecConfirm">加入购物车</view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,23 @@
+<view class="cart-bar safe-bottom">
+  <view class="left" bindtap="onCartTap">
+    <view class="cart-icon-box {{totalCount > 0 ? 'has' : ''}}">
+      <text class="cart-emoji">🛒</text>
+      <view class="dot" wx:if="{{totalCount > 0}}">{{totalCount}}</view>
+    </view>
+    <view class="cart-info">
+      <block wx:if="{{totalCount > 0}}">
+        <view class="cart-price">
+          <text class="unit">¥</text>{{totalPrice}}
+        </view>
+        <view class="cart-extra">{{deliveryFee === 0 ? '免配送费' : '配送费¥'+deliveryFee}}</view>
+      </block>
+      <block wx:else>
+        <view class="cart-price empty">¥0</view>
+        <view class="cart-extra">{{diffText}}</view>
+      </block>
+    </view>
+  </view>
+  <view class="checkout-btn {{meetsMinOrder ? 'ready' : ''}}" bindtap="onCheckout">
+    {{meetsMinOrder ? '去结算' : '¥' + minOrder + '起送'}}
+  </view>
+</view>

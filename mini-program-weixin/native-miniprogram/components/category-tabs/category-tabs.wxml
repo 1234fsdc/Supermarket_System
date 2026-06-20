@@ -1,0 +1,10 @@
+<scroll-view class="cat-tabs" scroll-y="true" enhanced="true" show-scrollbar="false">
+  <block wx:for="{{list}}" wx:key="id">
+    <view class="cat-item {{activeId === item.id ? 'active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onTap">
+      <text class="cat-text">{{item.name}}</text>
+      <view class="cat-bar" wx:if="{{activeId === item.id}}"></view>
+    </view>
+  </block>
+</scroll-view>

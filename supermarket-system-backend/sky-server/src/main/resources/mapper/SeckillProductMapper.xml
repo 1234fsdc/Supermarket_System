@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sky.mapper.SeckillProductMapper">
+
+    <select id="selectByActivityId" resultType="com.sky.vo.SeckillProductVO">
+        SELECT
+            sp.id,
+            sp.activity_id,
+            sp.product_id,
+            p.name AS product_name,
+            p.image AS product_image,
+            p.price AS original_price,
+            sp.seckill_price,
+            sp.seckill_stock,
+            sp.sold_count,
+            sp.limit_per_user,
+            sp.status
+        FROM seckill_product sp
+        LEFT JOIN product p ON sp.product_id = p.id
+        WHERE sp.activity_id = #{activityId}
+        ORDER BY sp.create_time DESC
+    </select>
+
+</mapper>

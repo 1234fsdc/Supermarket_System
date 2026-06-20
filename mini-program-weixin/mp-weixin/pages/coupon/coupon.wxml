@@ -1,0 +1,61 @@
+<view class="coupon-page">
+  <uni-nav-bar left-icon="back" leftIcon="arrowleft" title="领券中心" statusBar="true" fixed="true" color="#ffffff" backgroundColor="#E95F3C" bind:clickLeft="goBack"></uni-nav-bar>
+  
+  <view class="coupon-content">
+    <!-- 优惠券类型标签 -->
+    <view class="coupon-tabs">
+      <view class="tab-item {{activeTab === 0 ? 'active' : ''}}" bindtap="switchTab" data-index="0">全部</view>
+      <view class="tab-item {{activeTab === 1 ? 'active' : ''}}" bindtap="switchTab" data-index="1">满减券</view>
+      <view class="tab-item {{activeTab === 2 ? 'active' : ''}}" bindtap="switchTab" data-index="2">折扣券</view>
+      <view class="tab-item {{activeTab === 3 ? 'active' : ''}}" bindtap="switchTab" data-index="3">新人券</view>
+    </view>
+    
+    <!-- 优惠券列表 -->
+    <scroll-view scroll-y="true" class="coupon-list" style="height: {{scrollHeight}}px;">
+      <block wx:if="{{couponList.length > 0}}">
+        <view wx:for="{{couponList}}" wx:key="id" class="coupon-item {{item.received ? 'received' : ''}}">
+          <view class="coupon-left">
+            <view class="coupon-value">
+              <text class="currency" wx:if="{{item.type === 1 || item.type === 3}}">¥</text>
+              <text class="amount">{{item.discountValue}}</text>
+              <text class="unit" wx:if="{{item.type === 2}}">折</text>
+            </view>
+            <view class="coupon-type-tag">{{item.typeName}}</view>
+          </view>
+          <view class="coupon-divider"></view>
+          <view class="coupon-right">
+            <view class="coupon-info">
+              <view class="coupon-name">{{item.name}}</view>
+              <view class="coupon-condition" wx:if="{{item.minSpend > 0}}">满{{item.minSpend}}元可用</view>
+              <view class="coupon-condition" wx:else>无门槛使用</view>
+              <view class="coupon-time">有效期至 {{item.endTime}}</view>
+              <view class="coupon-scope" wx:if="{{item.scopeType === 1}}">全场通用</view>
+              <view class="coupon-scope" wx:if="{{item.scopeType === 2}}">指定分类</view>
+              <view class="coupon-scope" wx:if="{{item.scopeType === 3}}">指定商品</view>
+            </view>
+            <view class="coupon-action">
+              <view class="remain-count" wx:if="{{!item.received}}">剩余{{item.remainCount}}张</view>
+              <button class="receive-btn {{item.received ? 'received-btn' : ''}}" 
+                      bindtap="receiveCoupon" 
+                      data-id="{{item.id}}"
+                      disabled="{{item.received || item.remainCount <= 0}}">
+                {{item.received ? '已领取' : (item.remainCount <= 0 ? '已抢光' : '立即领取')}}
+              </button>
+            </view>
+          </view>
+        </view>
+      </block>
+      
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{couponList.length === 0 && !loading}}">
+        <image class="empty-icon" src="../../static/no_order.png" mode="aspectFit"></image>
+        <view class="empty-text">暂无优惠券</view>
+      </view>
+      
+      <!-- 加载状态 -->
+      <view class="loading-state" wx:if="{{loading}}">
+        <view class="loading-text">加载中...</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

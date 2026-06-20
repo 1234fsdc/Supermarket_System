@@ -1,0 +1,138 @@
+.order-list-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 60rpx;
+}
+
+/* Tab 栏 */
+.tab-bar {
+  white-space: nowrap;
+  background: #fff;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1rpx solid var(--border-light);
+}
+.tab-item {
+  display: inline-block;
+  padding: 24rpx 32rpx;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  position: relative;
+}
+.tab-item.active {
+  color: var(--tm-red);
+  font-weight: 700;
+}
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: var(--tm-red);
+  border-radius: 2rpx;
+}
+
+/* 订单列表 */
+.order-list {
+  padding: 16rpx 20rpx;
+}
+.order-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.oc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22rpx 24rpx;
+  border-bottom: 1rpx solid var(--border-light);
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.oc-status {
+  font-size: 24rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 6rpx;
+  font-weight: 500;
+}
+
+.oc-body {
+  padding: 20rpx 24rpx;
+  display: flex;
+  gap: 12rpx;
+  flex-wrap: wrap;
+  border-bottom: 1rpx solid var(--border-light);
+}
+.oc-img {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: var(--radius-md);
+  background: #F5F5F5;
+}
+.oc-summary {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22rpx;
+  color: var(--text-tertiary);
+  margin-top: 8rpx;
+}
+.oc-time {
+  color: var(--text-tertiary);
+}
+
+.oc-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18rpx 24rpx;
+}
+.oc-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8rpx;
+  font-size: 24rpx;
+  color: var(--text-secondary);
+}
+.oc-price {
+  font-size: 32rpx;
+  font-weight: 700;
+  color: var(--tm-red);
+}
+.oc-actions {
+  display: flex;
+  gap: 16rpx;
+}
+
+.btn-sm-outline {
+  padding: 12rpx 28rpx;
+  border: 2rpx solid var(--border-medium);
+  color: var(--text-secondary);
+  border-radius: 32rpx;
+  font-size: 24rpx;
+}
+.btn-sm-primary {
+  padding: 12rpx 28rpx;
+  background: var(--tm-red-gradient);
+  color: #fff;
+  border-radius: 32rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  box-shadow: 0 2rpx 8rpx rgba(255,0,54,0.15);
+}
+
+.loading, .nomore {
+  text-align: center;
+  padding: 30rpx;
+  color: var(--text-tertiary);
+  font-size: 24rpx;
+}

@@ -1,0 +1,69 @@
+<view class="seckill-page">
+  <!-- 顶部 -->
+  <view class="sk-header">
+    <view class="sk-header-bg"></view>
+    <view class="sk-header-content">
+      <view class="sk-title-row">
+        <text class="sk-big-icon">⚡</text>
+        <view>
+          <text class="sk-title">限时秒杀</text>
+        </view>
+      </view>
+      <view class="sk-countdown">
+        <text class="sk-cd-label">距结束</text>
+        <text class="sk-cd-time">{{countdownText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 活动介绍 -->
+  <view class="sk-intro">
+    <text class="sk-intro-title">🎯 限时秒杀</text>
+    <text class="sk-intro-desc">精选爆款，超低价格限时抢购</text>
+  </view>
+
+  <view class="sk-section-title flex-between">
+    <text>⚡ 秒杀进行中</text>
+    <text class="sk-count">共 {{products.length}} 件</text>
+  </view>
+
+  <block wx:if="{{loading}}">
+    <view class="loading">加载中...</view>
+  </block>
+  <block wx:elif="{{products.length === 0}}">
+    <empty icon="⚡" text="暂无秒杀商品" height="40vh" />
+  </block>
+  <block wx:else>
+    <view class="sk-grid">
+      <view class="sk-card" wx:for="{{products}}" wx:key="id" wx:for-item="p">
+        <view class="sk-img-wrap" bindtap="goDetail" data-id="{{p.productId}}">
+          <image class="sk-img" src="{{p.image || '/static/imgDefault.png'}}" mode="aspectFill" />
+          <view class="sk-badge">⚡ 秒杀</view>
+        </view>
+        <view class="sk-info">
+          <text class="sk-name text-ellipsis-2" bindtap="goDetail" data-id="{{p.productId}}">{{p.productName || p.name}}</text>
+          <view class="sk-price-row">
+            <view class="sk-price">
+              <text class="unit">¥</text>{{p.seckillPriceText}}
+            </view>
+            <text class="sk-old">¥{{p.originalPriceText}}</text>
+          </view>
+          <view class="sk-progress">
+            <text class="sk-prog-text">已抢 {{p.soldCount || 0}}/{{p.seckillStock}}</text>
+            <view class="sk-prog-bar">
+              <view class="sk-prog-fill" style="width: {{Math.min((p.soldCount || 0) / (p.seckillStock || 100) * 100, 100)}}%;"></view>
+            </view>
+          </view>
+          <view class="sk-btn" catchtap="onSeckill" data-id="{{p.productId}}">立刻抢购</view>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 说明 -->
+  <view class="sk-footer">
+    <text>· 秒杀商品不支持使用优惠券</text>
+    <text>· 每人限购 2 件</text>
+    <text>· 秒杀商品不参与满减活动</text>
+  </view>
+</view>

@@ -1,0 +1,72 @@
+.success-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 40rpx;
+}
+
+.s-top-bar {
+  height: 200rpx;
+  background: var(--tm-red-gradient-soft);
+  border-radius: 0 0 48rpx 48rpx;
+}
+
+.s-card {
+  margin: -120rpx 24rpx 20rpx;
+  background: #fff;
+  border-radius: var(--radius-xl);
+  padding: 48rpx 24rpx;
+  text-align: center;
+  box-shadow: var(--shadow-elevated);
+}
+.s-icon {
+  font-size: 100rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+.s-title {
+  font-size: 40rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+}
+.s-sub {
+  font-size: 26rpx;
+  color: var(--text-secondary);
+  margin-top: 10rpx;
+  display: block;
+}
+.s-amount-row {
+  margin-top: 24rpx;
+  padding: 20rpx;
+  background: var(--bg-tag-red);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+}
+.s-am-label { font-size: 24rpx; color: var(--text-secondary); }
+.s-am-value {
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--tm-red);
+}
+.s-order-id {
+  display: block;
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+}
+
+.s-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-top: 1rpx solid var(--border-light);
+}

@@ -1,0 +1,16 @@
+<view class="promo-entry-bar">
+  <view class="promo-item" bindtap="goCoupon">
+    <view class="promo-icon coupon-icon">券</view>
+    <text class="promo-text">领券中心</text>
+  </view>
+  <view class="promo-divider"></view>
+  <view class="promo-item" bindtap="goSeckill">
+    <view class="promo-icon seckill-icon">秒</view>
+    <text class="promo-text">限时秒杀</text>
+  </view>
+  <view class="promo-divider"></view>
+  <view class="promo-item" bindtap="goMyCoupon">
+    <view class="promo-icon mycoupon-icon">卡</view>
+    <text class="promo-text">我的券</text>
+  </view>
+</view>

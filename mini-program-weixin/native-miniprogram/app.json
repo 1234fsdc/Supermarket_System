@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/details/details",
+    "pages/order/order",
+    "pages/pay/pay",
+    "pages/success/success",
+    "pages/address/address",
+    "pages/addOrEditAddress/addOrEditAddress",
+    "pages/remark/remark",
+    "pages/my/my",
+    "pages/historyOrder/historyOrder",
+    "pages/coupon/coupon",
+    "pages/myCoupon/myCoupon",
+    "pages/seckill/seckill",
+    "pages/aiService/aiService"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF0036",
+    "navigationBarTitleText": "木东超市",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F5F5F5",
+    "enablePullDownRefresh": false
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

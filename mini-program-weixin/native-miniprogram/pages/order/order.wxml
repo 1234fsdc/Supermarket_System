@@ -1,0 +1,106 @@
+<view class="order-page">
+  <block wx:if="{{cartList.length === 0}}">
+    <empty icon="🛒" text="购物车是空的~" height="50vh" />
+    <view class="flex-center mt-20">
+      <view class="btn-outline" bindtap="goHome" style="width:400rpx;">去逛逛</view>
+    </view>
+  </block>
+  <block wx:else>
+    <!-- 地址 -->
+    <view class="address-section" bindtap="chooseAddress">
+      <block wx:if="{{address}}">
+        <view class="addr-row">
+          <text class="addr-pin">📍</text>
+          <view class="addr-detail">
+            <view class="addr-name-row">
+              <text>{{address.consignee}}</text>
+              <text class="addr-phone">{{address.phone}}</text>
+              <text class="addr-tag" wx:if="{{address.label}}">{{address.label === 'home' ? '家' : address.label === 'company' ? '公司' : address.label === 'school' ? '学校' : address.label}}</text>
+            </view>
+            <text class="addr-full">{{address.provinceName}}{{address.cityName}}{{address.districtName}}{{address.detail}}</text>
+          </view>
+          <text class="addr-arrow">›</text>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="addr-row">
+          <text class="addr-pin">📍</text>
+          <text class="addr-empty-text">请添加收货地址</text>
+          <text class="addr-arrow">›</text>
+        </view>
+      </block>
+    </view>
+
+    <!-- 送达时间 -->
+    <view class="row-line" bindtap="toggleDelivery">
+      <text class="row-icon">⏰</text>
+      <text class="row-label">送达时间</text>
+      <text class="row-value">{{deliveryType === 1 ? '尽快送达（约30min）' : estimatedTime}}</text>
+      <text class="row-arrow">›</text>
+    </view>
+
+    <!-- 商品列表 -->
+    <view class="goods-section">
+      <view class="gs-header">
+        <text>🏪 木东超市</text>
+      </view>
+      <block wx:for="{{cartList}}" wx:key="id" wx:for-item="item">
+        <view class="gs-item">
+          <image class="gs-img" src="{{item.image || '/static/imgDefault.png'}}" mode="aspectFill" />
+          <view class="gs-info">
+            <text class="gs-name text-ellipsis-2">{{item.name}}</text>
+            <view class="gs-bottom">
+              <view class="gs-price">
+                <text class="unit">¥</text>{{item.amount}}
+              </view>
+              <text class="gs-num">×{{item.number}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <!-- 备注 -->
+    <view class="row-line" bindtap="goRemark">
+      <text class="row-icon">📝</text>
+      <text class="row-label">备注</text>
+      <text class="row-value text-ellipsis">{{remark || '口味/偏好'}}</text>
+      <text class="row-arrow">›</text>
+    </view>
+
+    <!-- 配送费 -->
+    <view class="row-line">
+      <text class="row-icon">🚚</text>
+      <text class="row-label">配送费</text>
+      <text class="row-value-bold">{{deliveryFee === 0 ? '免运费' : '¥'+deliveryFee}}</text>
+    </view>
+
+    <!-- 优惠券 -->
+    <view class="row-line" bindtap="chooseCoupon">
+      <text class="row-icon">🎫</text>
+      <text class="row-label">优惠券</text>
+      <block wx:if="{{selectedCoupon}}">
+        <text class="coupon-discount">-¥{{couponDiscount}}</text>
+      </block>
+      <block wx:elif="{{usableCoupons.length > 0}}">
+        <text class="row-value">{{usableCoupons.length}}张可用 ›</text>
+      </block>
+      <block wx:else>
+        <text class="row-value">暂无可用 ›</text>
+      </block>
+    </view>
+
+    <view class="bottom-spacer"></view>
+
+    <!-- 底部栏 -->
+    <view class="bottom-action safe-bottom">
+      <view class="ba-left">
+        <text class="ba-total">合计 <text class="ba-price">¥{{finalPrice}}</text></text>
+        <text class="ba-save" wx:if="{{couponDiscount > 0}}">已优惠 ¥{{couponDiscount}}</text>
+      </view>
+      <view class="btn-primary {{submitting ? 'disabled' : ''}}" bindtap="onSubmit" style="min-width:260rpx;height:80rpx;display:flex;align-items:center;justify-content:center;font-size:30rpx;">
+        {{submitting ? '提交中...' : '提交订单'}}
+      </view>
+    </view>
+  </block>
+</view>

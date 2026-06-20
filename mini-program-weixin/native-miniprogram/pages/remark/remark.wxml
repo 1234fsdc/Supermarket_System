@@ -1,0 +1,15 @@
+<view class="remark-page">
+  <view class="remark-card">
+    <textarea class="textarea"
+              placeholder="选填，如：不要辣、放门口即可等"
+              value="{{text}}"
+              maxlength="200"
+              auto-height="true"
+              bindinput="onInput" />
+    <view class="char-count">{{text.length}}/200</view>
+  </view>
+
+  <view class="save-bar safe-bottom">
+    <view class="save-btn" bindtap="onSave">保存备注</view>
+  </view>
+</view>

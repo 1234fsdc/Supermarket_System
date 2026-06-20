@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "限时秒杀",
+  "navigationBarBackgroundColor": "#CC002B",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#F5F5F7",
+  "usingComponents": {
+    "empty": "/components/empty/empty"
+  }
+}

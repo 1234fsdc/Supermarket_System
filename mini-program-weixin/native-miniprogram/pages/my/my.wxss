@@ -1,0 +1,290 @@
+.my-page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  padding-bottom: 60rpx;
+}
+
+/* ===== 自定义导航栏 ===== */
+.custom-nav {
+  background: var(--tm-red-gradient-soft);
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  height: 88rpx;
+  padding: 0 20rpx;
+}
+.nav-back {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-back-arrow {
+  font-size: 40rpx;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+}
+.nav-title {
+  flex: 1;
+  text-align: center;
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #fff;
+}
+.nav-placeholder {
+  width: 64rpx;
+}
+
+/* ===== 用户区 ===== */
+.user-section {
+  background: var(--tm-red-gradient-soft);
+  color: #fff;
+  padding: 0 24rpx 40rpx;
+  border-radius: 0 0 36rpx 36rpx;
+}
+.user-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.user-right-row {
+  margin-left: auto;
+}
+.close-btn {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  color: #fff;
+}
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.user-row.unlogin {
+  justify-content: center;
+  padding: 20rpx 0;
+}
+.user-avatar {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 44rpx;
+  font-weight: 700;
+  color: var(--tm-red);
+  overflow: hidden;
+}
+.user-avatar.gray {
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 56rpx;
+}
+.user-detail { flex: 1; }
+.user-nick {
+  font-size: 34rpx;
+  font-weight: 700;
+  display: block;
+}
+.user-level {
+  margin-top: 6rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+.level-badge {
+  font-size: 20rpx;
+  background: rgba(255,255,255,0.2);
+  padding: 3rpx 12rpx;
+  border-radius: 10rpx;
+}
+.level-progress {
+  font-size: 20rpx;
+  opacity: 0.85;
+}
+.user-settings {
+  font-size: 24rpx;
+  opacity: 0.85;
+  padding: 8rpx 0;
+}
+.login-hint {
+  flex: 1;
+  height: 64rpx;
+  background: rgba(255,255,255,0.2);
+  border-radius: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* 数据统计条 */
+.user-stats-row {
+  margin-top: 28rpx;
+  display: flex;
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--radius-lg);
+  padding: 20rpx 0;
+}
+.us-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rpx;
+  border-right: 1rpx solid rgba(255,255,255,0.12);
+}
+.us-item:last-child { border-right: none; }
+.us-num { font-size: 32rpx; font-weight: 700; }
+.us-lbl { font-size: 22rpx; opacity: 0.85; }
+
+/* ===== 通用卡片 ===== */
+.section-card {
+  background: #fff;
+  margin: -16rpx 20rpx 20rpx;
+  border-radius: var(--radius-xl);
+  padding: 24rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.04);
+}
+.section-card.mt-0 { margin-top: -16rpx; }
+.section-card + .section-card { margin-top: 20rpx; }
+.sec-title {
+  font-size: 30rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 20rpx;
+}
+.sec-more { font-size: 24rpx; color: var(--text-tertiary); }
+
+/* 订单状态 */
+.order-status-row {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid var(--border-light);
+}
+.os-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rpx;
+  flex: 1;
+}
+.os-icon-wrap {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.os-icon { font-size: 28rpx; }
+.os-lbl { font-size: 22rpx; color: var(--text-primary); }
+.os-badge {
+  position: absolute;
+  top: -6rpx;
+  right: 10rpx;
+  min-width: 28rpx;
+  height: 28rpx;
+  border-radius: 14rpx;
+  background: var(--tm-red);
+  color: #fff;
+  font-size: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rpx;
+}
+
+/* 最近订单 */
+.recent-card {
+  margin-top: 16rpx;
+  padding: 16rpx;
+  background: #FAFAFA;
+  border-radius: var(--radius-md);
+}
+.rc-head { margin-bottom: 10rpx; }
+.rc-shop { font-size: 26rpx; font-weight: 600; }
+.rc-imgs {
+  display: flex;
+  gap: 8rpx;
+  margin: 8rpx 0;
+}
+.rc-img {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: var(--radius-sm);
+  background: #eee;
+}
+.rc-amount { color: var(--tm-red); font-weight: 700; font-size: 28rpx; }
+.rc-time { font-size: 20rpx; color: var(--text-tertiary); }
+
+/* 功能宫格 */
+.func-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8rpx;
+}
+.func-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx 0;
+}
+.func-icon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36rpx;
+}
+.func-lbl {
+  font-size: 22rpx;
+  color: var(--text-primary);
+}
+
+/* 推荐 */
+.recommend-section {
+  padding: 20rpx 0;
+  text-align: center;
+}
+.recommend-text {
+  font-size: 24rpx;
+  color: var(--text-tertiary);
+}
+
+/* 退出登录 */
+.logout-section {
+  margin: 20rpx 20rpx 40rpx;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 28rpx 0;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+.logout-text {
+  font-size: 30rpx;
+  color: var(--tm-red);
+  font-weight: 500;
+}

@@ -1,0 +1,276 @@
+.seckill-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.seckill-content {
+  padding-top: 88rpx;
+}
+
+/* 活动头部 */
+.activity-header {
+  background: linear-gradient(135deg, #E95F3C 0%, #ff7a5c 100%);
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activity-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.countdown-box {
+  display: flex;
+  align-items: center;
+}
+
+.countdown-label {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.9);
+  margin-right: 12rpx;
+}
+
+.countdown-time {
+  display: flex;
+  align-items: center;
+}
+
+.time-num {
+  display: inline-block;
+  min-width: 44rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 600;
+  border-radius: 8rpx;
+}
+
+.time-sep {
+  color: #fff;
+  font-size: 24rpx;
+  margin: 0 6rpx;
+  font-weight: 600;
+}
+
+/* 秒杀列表 */
+.seckill-list {
+  padding: 20rpx;
+}
+
+.seckill-item {
+  background-color: #fff;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.06);
+}
+
+.product-image-box {
+  position: relative;
+  width: 100%;
+  height: 360rpx;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+}
+
+.seckill-tag {
+  position: absolute;
+  top: 20rpx;
+  left: 20rpx;
+  padding: 6rpx 20rpx;
+  background: linear-gradient(135deg, #E95F3C 0%, #ff7a5c 100%);
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 24rpx;
+  font-weight: 600;
+}
+
+.sold-progress {
+  position: absolute;
+  bottom: 20rpx;
+  left: 20rpx;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 16rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8rpx;
+  overflow: hidden;
+  margin-right: 16rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffc200 0%, #ffdb4d 100%);
+  border-radius: 8rpx;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 22rpx;
+  color: #fff;
+  text-shadow: 0 1rpx 2rpx rgba(0, 0, 0, 0.3);
+}
+
+.sold-out-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sold-out-text {
+  width: 140rpx;
+  height: 140rpx;
+  line-height: 140rpx;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 50%;
+  transform: rotate(-15deg);
+}
+
+.product-info {
+  padding: 24rpx;
+}
+
+.product-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.product-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 16rpx;
+}
+
+.price-box {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 16rpx;
+}
+
+.seckill-price {
+  display: flex;
+  align-items: baseline;
+  color: #E95F3C;
+}
+
+.seckill-price .currency {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.seckill-price .price {
+  font-size: 48rpx;
+  font-weight: bold;
+}
+
+.original-price {
+  display: flex;
+  align-items: baseline;
+  margin-left: 20rpx;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.original-price .currency {
+  font-size: 22rpx;
+}
+
+.original-price .price {
+  font-size: 28rpx;
+}
+
+.action-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.stock-info {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.stock-info .no-stock {
+  color: #999;
+}
+
+.limit-info {
+  font-size: 22rpx;
+  color: #E95F3C;
+  padding: 4rpx 12rpx;
+  background-color: #fff2f0;
+  border-radius: 8rpx;
+}
+
+.buy-btn {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #E95F3C 0%, #ff7a5c 100%);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-radius: 40rpx;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.buy-btn::after {
+  border: none;
+}
+
+.buy-btn.disabled {
+  background: #ccc;
+}
+
+.buy-btn[disabled] {
+  background: #ccc;
+  color: #fff;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 200rpx;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}

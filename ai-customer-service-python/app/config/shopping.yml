@@ -1,0 +1,9 @@
+# 智能导购服务配置
+shopping:
+  java_api:
+    base_url: "http://localhost:8080"
+    timeout: 10.0  # HTTP请求超时（秒）
+    endpoints:
+      search: "/user/product/search"
+      category_list: "/user/product/list"
+      product_detail: "/user/product/detail"
